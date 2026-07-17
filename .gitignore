@@ -61,6 +61,8 @@ logs/
 mosquitto/log/
 **/*.log
 
+attaque/
+
 # Generated and runtime data
 donnees_enr/
 *.db
