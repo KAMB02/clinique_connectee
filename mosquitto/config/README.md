@@ -2,11 +2,11 @@
 
 Ce dossier contient la configuration du broker **Mosquitto** pour la clinique connectée.
 
-## 🔐 Objectif
+##  Objectif
 - Sécuriser les communications MQTT avec TLS/SSL.
 - Authentifier les capteurs et garantir la confidentialité des données médicales.
 
-## 📂 Contenu
+##  Contenu
 - `mosquitto.conf` : configuration du broker.
 - `certs/` : certificats TLS.
 - `setup_auth.sh` : script d’initialisation de l’authentification.
