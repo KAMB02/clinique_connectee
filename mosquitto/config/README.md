@@ -11,7 +11,7 @@ Ce dossier contient la configuration du broker **Mosquitto** pour la clinique co
 - `certs/` : certificats TLS.
 - `setup_auth.sh` : script d’initialisation de l’authentification.
 
-## ⚙️ Mise en place
+##  Mise en place
 1. Installer Mosquitto sur le serveur.
 2. Copier les certificats TLS dans `certs/`.
 3. Lancer le script :
