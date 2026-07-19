@@ -1,0 +1,1202 @@
+[
+  {
+    "topic": "clinique/energie/ups",
+    "payload": "energie_ups,device_id=ESP32_ENERGIE statut=\"SECTEUR\",niveau_pct=88.6,autonomie_min=39.9,en_charge=true,tension_v=213.4,timestamp_esp=1783710163194",
+    "timestamp": 1783710163.1998854
+  },
+  {
+    "topic": "clinique/energie/generateur",
+    "payload": "energie_generateur,device_id=ESP32_ENERGIE actif=false,charge_pct=0.0,statut=\"OFF\",timestamp_esp=1783710163194",
+    "timestamp": 1783710163.20034
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=BLOC-A consommation_w=1368.7,timestamp_esp=1783710163194",
+    "timestamp": 1783710163.2008188
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=BLOC-B consommation_w=862.5,timestamp_esp=1783710163195",
+    "timestamp": 1783710163.2012281
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=URGENCE consommation_w=2565.7,timestamp_esp=1783710163195",
+    "timestamp": 1783710163.201465
+  },
+  {
+    "topic": "clinique/securite/couloir-B/camera",
+    "payload": "camera_intrusion,zone=couloir-B,camera_id=CAM-couloir-B,device_id=ESP32_SECU intrusion_ia=false,mouvement_detecte=false,confiance_pct=5.7,timestamp_esp=1783710163295",
+    "timestamp": 1783710163.3027008
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=96.2,ecg_bpm=79.0,temperature=36.6,pression_sys=120.2,pression_dia=83.8,alerte_active=true,timestamp_esp=1783710163745",
+    "timestamp": 1783710163.747533
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=690.1,timestamp_esp=1783710163745",
+    "timestamp": 1783710163.7477949
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710163745",
+    "timestamp": 1783710163.7480485
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=50.9,niveau_poche_ml=482.2,alarme=1,timestamp_esp=1783710163745",
+    "timestamp": 1783710163.7483265
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.1,ecg_bpm=81.0,temperature=36.4,pression_sys=126.8,pression_dia=84.2,alerte_active=false,timestamp_esp=1783710164220",
+    "timestamp": 1783710164.2221458
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=625.4,timestamp_esp=1783710164220",
+    "timestamp": 1783710164.2223327
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710164220",
+    "timestamp": 1783710164.2225406
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=51.9,niveau_poche_ml=481.8,alarme=0,timestamp_esp=1783710164220",
+    "timestamp": 1783710164.2227182
+  },
+  {
+    "topic": "clinique/chambre/CH-003/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation spo2=97.8,ecg_bpm=72.8,temperature=36.4,pression_sys=116.5,pression_dia=82.0,alerte_active=false,timestamp_esp=1783710168278",
+    "timestamp": 1783710168.279844
+  },
+  {
+    "topic": "clinique/chambre/CH-003/co2",
+    "payload": "co2_ambiant,chambre_id=CH-003,device_id=ESP32_CH003,service=hospitalisation co2_ppm=669.0,timestamp_esp=1783710168278",
+    "timestamp": 1783710168.2799983
+  },
+  {
+    "topic": "clinique/chambre/CH-003/mouvement",
+    "payload": "mouvement,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710168278",
+    "timestamp": 1783710168.2801018
+  },
+  {
+    "topic": "clinique/chambre/CH-003/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-003,patient_id=PAT-103,perfuseur_id=PERF-CH-003,service=hospitalisation debit_ml_h=48.3,niveau_poche_ml=490.5,alarme=0,timestamp_esp=1783710168278",
+    "timestamp": 1783710168.2802079
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=95.9,ecg_bpm=79.1,temperature=36.4,pression_sys=129.5,pression_dia=80.0,alerte_active=true,timestamp_esp=1783710168746",
+    "timestamp": 1783710168.748321
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=666.9,timestamp_esp=1783710168747",
+    "timestamp": 1783710168.7484515
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710168747",
+    "timestamp": 1783710168.7485557
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=51.4,niveau_poche_ml=481.6,alarme=1,timestamp_esp=1783710168747",
+    "timestamp": 1783710168.7486677
+  },
+  {
+    "topic": "clinique/chambre/CH-005/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation spo2=98.1,ecg_bpm=74.8,temperature=36.6,pression_sys=118.0,pression_dia=78.9,alerte_active=false,timestamp_esp=1783710168935",
+    "timestamp": 1783710168.9370563
+  },
+  {
+    "topic": "clinique/chambre/CH-005/co2",
+    "payload": "co2_ambiant,chambre_id=CH-005,device_id=ESP32_CH005,service=hospitalisation co2_ppm=649.9,timestamp_esp=1783710168935",
+    "timestamp": 1783710168.93723
+  },
+  {
+    "topic": "clinique/chambre/CH-005/mouvement",
+    "payload": "mouvement,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710168935",
+    "timestamp": 1783710168.9373705
+  },
+  {
+    "topic": "clinique/chambre/CH-005/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-005,patient_id=PAT-105,perfuseur_id=PERF-CH-005,service=hospitalisation debit_ml_h=49.9,niveau_poche_ml=491.0,alarme=0,timestamp_esp=1783710168935",
+    "timestamp": 1783710168.9377568
+  },
+  {
+    "topic": "clinique/chambre/CH-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation spo2=97.2,ecg_bpm=79.5,temperature=36.5,pression_sys=120.7,pression_dia=80.2,alerte_active=false,timestamp_esp=1783710168969",
+    "timestamp": 1783710168.9705734
+  },
+  {
+    "topic": "clinique/chambre/CH-001/co2",
+    "payload": "co2_ambiant,chambre_id=CH-001,device_id=ESP32_CH001,service=hospitalisation co2_ppm=583.9,timestamp_esp=1783710168969",
+    "timestamp": 1783710168.970699
+  },
+  {
+    "topic": "clinique/chambre/CH-001/mouvement",
+    "payload": "mouvement,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710168969",
+    "timestamp": 1783710168.9708786
+  },
+  {
+    "topic": "clinique/chambre/CH-001/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-001,patient_id=PAT-101,perfuseur_id=PERF-CH-001,service=hospitalisation debit_ml_h=49.1,niveau_poche_ml=490.6,alarme=0,timestamp_esp=1783710168969",
+    "timestamp": 1783710168.9709911
+  },
+  {
+    "topic": "clinique/chambre/CH-004/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation spo2=98.0,ecg_bpm=69.1,temperature=36.7,pression_sys=120.5,pression_dia=78.5,alerte_active=false,timestamp_esp=1783710169011",
+    "timestamp": 1783710169.0139055
+  },
+  {
+    "topic": "clinique/chambre/CH-004/co2",
+    "payload": "co2_ambiant,chambre_id=CH-004,device_id=ESP32_CH004,service=hospitalisation co2_ppm=577.0,timestamp_esp=1783710169011",
+    "timestamp": 1783710169.0143726
+  },
+  {
+    "topic": "clinique/chambre/CH-004/mouvement",
+    "payload": "mouvement,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation mouvement=1,chute_detectee=0,timestamp_esp=1783710169011",
+    "timestamp": 1783710169.0146172
+  },
+  {
+    "topic": "clinique/chambre/CH-004/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-004,patient_id=PAT-104,perfuseur_id=PERF-CH-004,service=hospitalisation debit_ml_h=51.4,niveau_poche_ml=490.7,alarme=0,timestamp_esp=1783710169012",
+    "timestamp": 1783710169.0148048
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.4,ecg_bpm=79.6,temperature=36.6,pression_sys=125.0,pression_dia=81.7,alerte_active=true,timestamp_esp=1783710169221",
+    "timestamp": 1783710169.222988
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=748.5,timestamp_esp=1783710169221",
+    "timestamp": 1783710169.2231665
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710169221",
+    "timestamp": 1783710169.2233043
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=48.3,niveau_poche_ml=481.3,alarme=1,timestamp_esp=1783710169221",
+    "timestamp": 1783710169.2234507
+  },
+  {
+    "topic": "clinique/chambre/CH-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation spo2=96.2,ecg_bpm=72.0,temperature=36.4,pression_sys=117.4,pression_dia=82.1,alerte_active=false,timestamp_esp=1783710169279",
+    "timestamp": 1783710169.280511
+  },
+  {
+    "topic": "clinique/chambre/CH-002/co2",
+    "payload": "co2_ambiant,chambre_id=CH-002,device_id=ESP32_CH002,service=hospitalisation co2_ppm=598.9,timestamp_esp=1783710169279",
+    "timestamp": 1783710169.280639
+  },
+  {
+    "topic": "clinique/chambre/CH-002/mouvement",
+    "payload": "mouvement,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710169279",
+    "timestamp": 1783710169.2807882
+  },
+  {
+    "topic": "clinique/chambre/CH-002/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-002,patient_id=PAT-102,perfuseur_id=PERF-CH-002,service=hospitalisation debit_ml_h=49.4,niveau_poche_ml=490.6,alarme=0,timestamp_esp=1783710169279",
+    "timestamp": 1783710169.2809193
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=96.0,ecg_bpm=78.4,temperature=36.5,pression_sys=128.2,pression_dia=80.8,alerte_active=false,timestamp_esp=1783710173748",
+    "timestamp": 1783710173.74991
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=578.9,timestamp_esp=1783710173748",
+    "timestamp": 1783710173.7500942
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710173748",
+    "timestamp": 1783710173.7502358
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=48.9,niveau_poche_ml=481.1,alarme=0,timestamp_esp=1783710173748",
+    "timestamp": 1783710173.7503495
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.4,ecg_bpm=81.6,temperature=36.4,pression_sys=129.5,pression_dia=83.9,alerte_active=true,timestamp_esp=1783710174222",
+    "timestamp": 1783710174.2243016
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=743.1,timestamp_esp=1783710174222",
+    "timestamp": 1783710174.2245455
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710174222",
+    "timestamp": 1783710174.2247472
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=48.6,niveau_poche_ml=480.7,alarme=1,timestamp_esp=1783710174222",
+    "timestamp": 1783710174.224944
+  },
+  {
+    "topic": "clinique/energie/ups",
+    "payload": "energie_ups,device_id=ESP32_ENERGIE statut=\"SECTEUR\",niveau_pct=88.8,autonomie_min=40.0,en_charge=true,tension_v=220.9,timestamp_esp=1783710178200",
+    "timestamp": 1783710178.2016802
+  },
+  {
+    "topic": "clinique/energie/generateur",
+    "payload": "energie_generateur,device_id=ESP32_ENERGIE actif=false,charge_pct=0.0,statut=\"OFF\",timestamp_esp=1783710178200",
+    "timestamp": 1783710178.2018573
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=BLOC-A consommation_w=1115.2,timestamp_esp=1783710178200",
+    "timestamp": 1783710178.2020233
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=BLOC-B consommation_w=824.1,timestamp_esp=1783710178200",
+    "timestamp": 1783710178.2022052
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=URGENCE consommation_w=2668.6,timestamp_esp=1783710178200",
+    "timestamp": 1783710178.2023644
+  },
+  {
+    "topic": "clinique/chambre/CH-003/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation spo2=97.6,ecg_bpm=73.5,temperature=36.4,pression_sys=122.9,pression_dia=77.4,alerte_active=false,timestamp_esp=1783710178279",
+    "timestamp": 1783710178.2803059
+  },
+  {
+    "topic": "clinique/securite/couloir-B/camera",
+    "payload": "camera_intrusion,zone=couloir-B,camera_id=CAM-couloir-B,device_id=ESP32_SECU intrusion_ia=false,mouvement_detecte=false,confiance_pct=8.9,timestamp_esp=1783710178304",
+    "timestamp": 1783710178.3067908
+  },
+  {
+    "topic": "clinique/chambre/CH-003/co2",
+    "payload": "co2_ambiant,chambre_id=CH-003,device_id=ESP32_CH003,service=hospitalisation co2_ppm=595.1,timestamp_esp=1783710178279",
+    "timestamp": 1783710178.328389
+  },
+  {
+    "topic": "clinique/chambre/CH-003/mouvement",
+    "payload": "mouvement,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710178279",
+    "timestamp": 1783710178.32859
+  },
+  {
+    "topic": "clinique/chambre/CH-003/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-003,patient_id=PAT-103,perfuseur_id=PERF-CH-003,service=hospitalisation debit_ml_h=48.7,niveau_poche_ml=490.0,alarme=0,timestamp_esp=1783710178279",
+    "timestamp": 1783710178.3287675
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=95.8,ecg_bpm=78.5,temperature=36.6,pression_sys=129.3,pression_dia=83.8,alerte_active=false,timestamp_esp=1783710178749",
+    "timestamp": 1783710178.7508364
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=591.1,timestamp_esp=1783710178749",
+    "timestamp": 1783710178.7510304
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710178749",
+    "timestamp": 1783710178.751155
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=48.1,niveau_poche_ml=480.6,alarme=0,timestamp_esp=1783710178749",
+    "timestamp": 1783710178.751253
+  },
+  {
+    "topic": "clinique/chambre/CH-005/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation spo2=97.9,ecg_bpm=74.0,temperature=36.7,pression_sys=119.9,pression_dia=78.3,alerte_active=false,timestamp_esp=1783710178936",
+    "timestamp": 1783710178.9378104
+  },
+  {
+    "topic": "clinique/chambre/CH-005/co2",
+    "payload": "co2_ambiant,chambre_id=CH-005,device_id=ESP32_CH005,service=hospitalisation co2_ppm=618.1,timestamp_esp=1783710178936",
+    "timestamp": 1783710178.937938
+  },
+  {
+    "topic": "clinique/chambre/CH-005/mouvement",
+    "payload": "mouvement,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710178936",
+    "timestamp": 1783710178.9380715
+  },
+  {
+    "topic": "clinique/chambre/CH-005/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-005,patient_id=PAT-105,perfuseur_id=PERF-CH-005,service=hospitalisation debit_ml_h=49.8,niveau_poche_ml=490.4,alarme=0,timestamp_esp=1783710178936",
+    "timestamp": 1783710178.9382014
+  },
+  {
+    "topic": "clinique/chambre/CH-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation spo2=97.3,ecg_bpm=78.3,temperature=36.5,pression_sys=123.0,pression_dia=81.3,alerte_active=false,timestamp_esp=1783710178970",
+    "timestamp": 1783710178.9716341
+  },
+  {
+    "topic": "clinique/chambre/CH-001/co2",
+    "payload": "co2_ambiant,chambre_id=CH-001,device_id=ESP32_CH001,service=hospitalisation co2_ppm=579.2,timestamp_esp=1783710178970",
+    "timestamp": 1783710178.9717798
+  },
+  {
+    "topic": "clinique/chambre/CH-001/mouvement",
+    "payload": "mouvement,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation mouvement=1,chute_detectee=0,timestamp_esp=1783710178970",
+    "timestamp": 1783710178.9718964
+  },
+  {
+    "topic": "clinique/chambre/CH-001/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-001,patient_id=PAT-101,perfuseur_id=PERF-CH-001,service=hospitalisation debit_ml_h=48.5,niveau_poche_ml=490.0,alarme=0,timestamp_esp=1783710178970",
+    "timestamp": 1783710178.9719942
+  },
+  {
+    "topic": "clinique/chambre/CH-004/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation spo2=97.9,ecg_bpm=70.4,temperature=36.5,pression_sys=120.1,pression_dia=81.1,alerte_active=false,timestamp_esp=1783710179012",
+    "timestamp": 1783710179.014496
+  },
+  {
+    "topic": "clinique/chambre/CH-004/co2",
+    "payload": "co2_ambiant,chambre_id=CH-004,device_id=ESP32_CH004,service=hospitalisation co2_ppm=660.0,timestamp_esp=1783710179012",
+    "timestamp": 1783710179.014589
+  },
+  {
+    "topic": "clinique/chambre/CH-004/mouvement",
+    "payload": "mouvement,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710179013",
+    "timestamp": 1783710179.014703
+  },
+  {
+    "topic": "clinique/chambre/CH-004/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-004,patient_id=PAT-104,perfuseur_id=PERF-CH-004,service=hospitalisation debit_ml_h=51.5,niveau_poche_ml=490.1,alarme=0,timestamp_esp=1783710179013",
+    "timestamp": 1783710179.01482
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.4,ecg_bpm=79.6,temperature=36.7,pression_sys=120.4,pression_dia=84.5,alerte_active=true,timestamp_esp=1783710179223",
+    "timestamp": 1783710179.2252781
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=783.3,timestamp_esp=1783710179223",
+    "timestamp": 1783710179.2254128
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710179223",
+    "timestamp": 1783710179.22553
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=50.6,niveau_poche_ml=480.3,alarme=1,timestamp_esp=1783710179224",
+    "timestamp": 1783710179.2256875
+  },
+  {
+    "topic": "clinique/chambre/CH-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation spo2=96.6,ecg_bpm=71.1,temperature=36.5,pression_sys=123.2,pression_dia=80.6,alerte_active=false,timestamp_esp=1783710179280",
+    "timestamp": 1783710179.281842
+  },
+  {
+    "topic": "clinique/chambre/CH-002/co2",
+    "payload": "co2_ambiant,chambre_id=CH-002,device_id=ESP32_CH002,service=hospitalisation co2_ppm=614.9,timestamp_esp=1783710179280",
+    "timestamp": 1783710179.2820399
+  },
+  {
+    "topic": "clinique/chambre/CH-002/mouvement",
+    "payload": "mouvement,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710179280",
+    "timestamp": 1783710179.282165
+  },
+  {
+    "topic": "clinique/chambre/CH-002/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-002,patient_id=PAT-102,perfuseur_id=PERF-CH-002,service=hospitalisation debit_ml_h=48.7,niveau_poche_ml=490.0,alarme=0,timestamp_esp=1783710179280",
+    "timestamp": 1783710179.2823498
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=96.0,ecg_bpm=78.3,temperature=36.5,pression_sys=127.4,pression_dia=79.1,alerte_active=false,timestamp_esp=1783710183750",
+    "timestamp": 1783710183.7522671
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=620.9,timestamp_esp=1783710183750",
+    "timestamp": 1783710183.7525015
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=1,chute_detectee=0,timestamp_esp=1783710183750",
+    "timestamp": 1783710183.7526546
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=51.5,niveau_poche_ml=480.1,alarme=0,timestamp_esp=1783710183750",
+    "timestamp": 1783710183.7528214
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.7,ecg_bpm=80.3,temperature=36.7,pression_sys=128.2,pression_dia=84.4,alerte_active=true,timestamp_esp=1783710184224",
+    "timestamp": 1783710184.226086
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=697.7,timestamp_esp=1783710184224",
+    "timestamp": 1783710184.226233
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710184224",
+    "timestamp": 1783710184.2263815
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=50.6,niveau_poche_ml=479.7,alarme=1,timestamp_esp=1783710184224",
+    "timestamp": 1783710184.2265177
+  },
+  {
+    "topic": "clinique/chambre/CH-003/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation spo2=97.8,ecg_bpm=75.0,temperature=36.7,pression_sys=123.9,pression_dia=80.2,alerte_active=false,timestamp_esp=1783710188279",
+    "timestamp": 1783710188.2819848
+  },
+  {
+    "topic": "clinique/chambre/CH-003/co2",
+    "payload": "co2_ambiant,chambre_id=CH-003,device_id=ESP32_CH003,service=hospitalisation co2_ppm=592.4,timestamp_esp=1783710188279",
+    "timestamp": 1783710188.2823148
+  },
+  {
+    "topic": "clinique/chambre/CH-003/mouvement",
+    "payload": "mouvement,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation mouvement=1,chute_detectee=0,timestamp_esp=1783710188280",
+    "timestamp": 1783710188.2824676
+  },
+  {
+    "topic": "clinique/chambre/CH-003/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-003,patient_id=PAT-103,perfuseur_id=PERF-CH-003,service=hospitalisation debit_ml_h=48.5,niveau_poche_ml=489.4,alarme=0,timestamp_esp=1783710188281",
+    "timestamp": 1783710188.2825835
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=96.0,ecg_bpm=78.3,temperature=36.5,pression_sys=122.1,pression_dia=79.2,alerte_active=false,timestamp_esp=1783710188751",
+    "timestamp": 1783710188.7532194
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=599.3,timestamp_esp=1783710188751",
+    "timestamp": 1783710188.7533967
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710188751",
+    "timestamp": 1783710188.75353
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=50.1,niveau_poche_ml=479.5,alarme=0,timestamp_esp=1783710188752",
+    "timestamp": 1783710188.7536545
+  },
+  {
+    "topic": "clinique/chambre/CH-005/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation spo2=97.8,ecg_bpm=76.9,temperature=36.4,pression_sys=116.2,pression_dia=81.3,alerte_active=false,timestamp_esp=1783710188937",
+    "timestamp": 1783710188.9433246
+  },
+  {
+    "topic": "clinique/chambre/CH-005/co2",
+    "payload": "co2_ambiant,chambre_id=CH-005,device_id=ESP32_CH005,service=hospitalisation co2_ppm=670.7,timestamp_esp=1783710188939",
+    "timestamp": 1783710188.94358
+  },
+  {
+    "topic": "clinique/chambre/CH-005/mouvement",
+    "payload": "mouvement,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710188939",
+    "timestamp": 1783710188.943857
+  },
+  {
+    "topic": "clinique/chambre/CH-005/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-005,patient_id=PAT-105,perfuseur_id=PERF-CH-005,service=hospitalisation debit_ml_h=49.6,niveau_poche_ml=489.8,alarme=0,timestamp_esp=1783710188940",
+    "timestamp": 1783710188.9441147
+  },
+  {
+    "topic": "clinique/chambre/CH-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation spo2=97.1,ecg_bpm=78.0,temperature=36.7,pression_sys=121.7,pression_dia=78.2,alerte_active=false,timestamp_esp=1783710188971",
+    "timestamp": 1783710188.9736724
+  },
+  {
+    "topic": "clinique/chambre/CH-001/co2",
+    "payload": "co2_ambiant,chambre_id=CH-001,device_id=ESP32_CH001,service=hospitalisation co2_ppm=589.2,timestamp_esp=1783710188971",
+    "timestamp": 1783710188.9740894
+  },
+  {
+    "topic": "clinique/chambre/CH-001/mouvement",
+    "payload": "mouvement,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710188971",
+    "timestamp": 1783710188.974316
+  },
+  {
+    "topic": "clinique/chambre/CH-001/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-001,patient_id=PAT-101,perfuseur_id=PERF-CH-001,service=hospitalisation debit_ml_h=48.7,niveau_poche_ml=489.6,alarme=0,timestamp_esp=1783710188972",
+    "timestamp": 1783710188.975236
+  },
+  {
+    "topic": "clinique/chambre/CH-004/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation spo2=97.8,ecg_bpm=70.0,temperature=36.8,pression_sys=123.7,pression_dia=80.7,alerte_active=false,timestamp_esp=1783710189013",
+    "timestamp": 1783710189.0162914
+  },
+  {
+    "topic": "clinique/chambre/CH-004/co2",
+    "payload": "co2_ambiant,chambre_id=CH-004,device_id=ESP32_CH004,service=hospitalisation co2_ppm=642.9,timestamp_esp=1783710189014",
+    "timestamp": 1783710189.0169878
+  },
+  {
+    "topic": "clinique/chambre/CH-004/mouvement",
+    "payload": "mouvement,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation mouvement=1,chute_detectee=0,timestamp_esp=1783710189014",
+    "timestamp": 1783710189.017203
+  },
+  {
+    "topic": "clinique/chambre/CH-004/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-004,patient_id=PAT-104,perfuseur_id=PERF-CH-004,service=hospitalisation debit_ml_h=49.2,niveau_poche_ml=489.6,alarme=0,timestamp_esp=1783710189014",
+    "timestamp": 1783710189.017382
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.7,ecg_bpm=81.4,temperature=36.8,pression_sys=124.7,pression_dia=83.2,alerte_active=true,timestamp_esp=1783710189225",
+    "timestamp": 1783710189.2287247
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=742.1,timestamp_esp=1783710189225",
+    "timestamp": 1783710189.2290256
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710189226",
+    "timestamp": 1783710189.2292836
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=51.5,niveau_poche_ml=479.2,alarme=1,timestamp_esp=1783710189226",
+    "timestamp": 1783710189.2295349
+  },
+  {
+    "topic": "clinique/chambre/CH-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation spo2=96.4,ecg_bpm=72.6,temperature=36.7,pression_sys=121.9,pression_dia=81.1,alerte_active=false,timestamp_esp=1783710189281",
+    "timestamp": 1783710189.2861538
+  },
+  {
+    "topic": "clinique/chambre/CH-002/co2",
+    "payload": "co2_ambiant,chambre_id=CH-002,device_id=ESP32_CH002,service=hospitalisation co2_ppm=598.7,timestamp_esp=1783710189282",
+    "timestamp": 1783710189.2864697
+  },
+  {
+    "topic": "clinique/chambre/CH-002/mouvement",
+    "payload": "mouvement,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710189282",
+    "timestamp": 1783710189.2867455
+  },
+  {
+    "topic": "clinique/chambre/CH-002/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-002,patient_id=PAT-102,perfuseur_id=PERF-CH-002,service=hospitalisation debit_ml_h=48.9,niveau_poche_ml=489.5,alarme=0,timestamp_esp=1783710189282",
+    "timestamp": 1783710189.2870996
+  },
+  {
+    "topic": "clinique/energie/ups",
+    "payload": "energie_ups,device_id=ESP32_ENERGIE statut=\"SECTEUR\",niveau_pct=89.1,autonomie_min=40.1,en_charge=true,tension_v=215.4,timestamp_esp=1783710193202",
+    "timestamp": 1783710193.2054274
+  },
+  {
+    "topic": "clinique/energie/generateur",
+    "payload": "energie_generateur,device_id=ESP32_ENERGIE actif=false,charge_pct=0.0,statut=\"OFF\",timestamp_esp=1783710193202",
+    "timestamp": 1783710193.2508252
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=BLOC-A consommation_w=1240.5,timestamp_esp=1783710193202",
+    "timestamp": 1783710193.251655
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=BLOC-B consommation_w=697.1,timestamp_esp=1783710193202",
+    "timestamp": 1783710193.252193
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=URGENCE consommation_w=2614.3,timestamp_esp=1783710193203",
+    "timestamp": 1783710193.2524412
+  },
+  {
+    "topic": "clinique/securite/couloir-B/camera",
+    "payload": "camera_intrusion,zone=couloir-B,camera_id=CAM-couloir-B,device_id=ESP32_SECU intrusion_ia=false,mouvement_detecte=false,confiance_pct=0.6,timestamp_esp=1783710193308",
+    "timestamp": 1783710193.3135514
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=95.6,ecg_bpm=77.6,temperature=36.8,pression_sys=129.5,pression_dia=84.3,alerte_active=false,timestamp_esp=1783710193754",
+    "timestamp": 1783710193.756867
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=598.9,timestamp_esp=1783710193754",
+    "timestamp": 1783710193.7591243
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710193755",
+    "timestamp": 1783710193.7594764
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=49.4,niveau_poche_ml=478.9,alarme=0,timestamp_esp=1783710193756",
+    "timestamp": 1783710193.759778
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.2,ecg_bpm=81.2,temperature=36.6,pression_sys=129.1,pression_dia=84.1,alerte_active=true,timestamp_esp=1783710194227",
+    "timestamp": 1783710194.229808
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=701.0,timestamp_esp=1783710194228",
+    "timestamp": 1783710194.2301216
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710194228",
+    "timestamp": 1783710194.230364
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=50.1,niveau_poche_ml=478.6,alarme=1,timestamp_esp=1783710194228",
+    "timestamp": 1783710194.2305846
+  },
+  {
+    "topic": "clinique/chambre/CH-003/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation spo2=97.9,ecg_bpm=74.6,temperature=36.4,pression_sys=116.7,pression_dia=79.4,alerte_active=false,timestamp_esp=1783710198282",
+    "timestamp": 1783710198.2840953
+  },
+  {
+    "topic": "clinique/chambre/CH-003/co2",
+    "payload": "co2_ambiant,chambre_id=CH-003,device_id=ESP32_CH003,service=hospitalisation co2_ppm=575.2,timestamp_esp=1783710198282",
+    "timestamp": 1783710198.2842355
+  },
+  {
+    "topic": "clinique/chambre/CH-003/mouvement",
+    "payload": "mouvement,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710198282",
+    "timestamp": 1783710198.284353
+  },
+  {
+    "topic": "clinique/chambre/CH-003/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-003,patient_id=PAT-103,perfuseur_id=PERF-CH-003,service=hospitalisation debit_ml_h=51.3,niveau_poche_ml=488.9,alarme=0,timestamp_esp=1783710198283",
+    "timestamp": 1783710198.2844675
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=95.3,ecg_bpm=76.5,temperature=36.7,pression_sys=127.6,pression_dia=81.3,alerte_active=false,timestamp_esp=1783710198757",
+    "timestamp": 1783710198.758681
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=589.8,timestamp_esp=1783710198757",
+    "timestamp": 1783710198.7588027
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710198757",
+    "timestamp": 1783710198.7589412
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=48.4,niveau_poche_ml=478.4,alarme=0,timestamp_esp=1783710198757",
+    "timestamp": 1783710198.759051
+  },
+  {
+    "topic": "clinique/chambre/CH-005/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation spo2=97.8,ecg_bpm=76.6,temperature=36.3,pression_sys=118.0,pression_dia=77.9,alerte_active=false,timestamp_esp=1783710198941",
+    "timestamp": 1783710198.9427855
+  },
+  {
+    "topic": "clinique/chambre/CH-005/co2",
+    "payload": "co2_ambiant,chambre_id=CH-005,device_id=ESP32_CH005,service=hospitalisation co2_ppm=668.5,timestamp_esp=1783710198941",
+    "timestamp": 1783710198.9429085
+  },
+  {
+    "topic": "clinique/chambre/CH-005/mouvement",
+    "payload": "mouvement,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710198941",
+    "timestamp": 1783710198.9430902
+  },
+  {
+    "topic": "clinique/chambre/CH-005/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-005,patient_id=PAT-105,perfuseur_id=PERF-CH-005,service=hospitalisation debit_ml_h=50.4,niveau_poche_ml=489.3,alarme=0,timestamp_esp=1783710198941",
+    "timestamp": 1783710198.943207
+  },
+  {
+    "topic": "clinique/chambre/CH-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation spo2=97.0,ecg_bpm=76.9,temperature=36.6,pression_sys=122.3,pression_dia=79.8,alerte_active=false,timestamp_esp=1783710198973",
+    "timestamp": 1783710198.975727
+  },
+  {
+    "topic": "clinique/chambre/CH-001/co2",
+    "payload": "co2_ambiant,chambre_id=CH-001,device_id=ESP32_CH001,service=hospitalisation co2_ppm=674.5,timestamp_esp=1783710198974",
+    "timestamp": 1783710198.97592
+  },
+  {
+    "topic": "clinique/chambre/CH-001/mouvement",
+    "payload": "mouvement,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710198974",
+    "timestamp": 1783710198.9761252
+  },
+  {
+    "topic": "clinique/chambre/CH-001/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-001,patient_id=PAT-101,perfuseur_id=PERF-CH-001,service=hospitalisation debit_ml_h=49.2,niveau_poche_ml=489.0,alarme=0,timestamp_esp=1783710198974",
+    "timestamp": 1783710198.9763384
+  },
+  {
+    "topic": "clinique/chambre/CH-004/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation spo2=98.0,ecg_bpm=70.0,temperature=36.4,pression_sys=115.8,pression_dia=79.8,alerte_active=false,timestamp_esp=1783710199014",
+    "timestamp": 1783710199.0163457
+  },
+  {
+    "topic": "clinique/chambre/CH-004/co2",
+    "payload": "co2_ambiant,chambre_id=CH-004,device_id=ESP32_CH004,service=hospitalisation co2_ppm=576.4,timestamp_esp=1783710199015",
+    "timestamp": 1783710199.0166683
+  },
+  {
+    "topic": "clinique/chambre/CH-004/mouvement",
+    "payload": "mouvement,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710199015",
+    "timestamp": 1783710199.0168731
+  },
+  {
+    "topic": "clinique/chambre/CH-004/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-004,patient_id=PAT-104,perfuseur_id=PERF-CH-004,service=hospitalisation debit_ml_h=49.4,niveau_poche_ml=489.0,alarme=0,timestamp_esp=1783710199015",
+    "timestamp": 1783710199.0170078
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.8,ecg_bpm=80.4,temperature=36.5,pression_sys=120.1,pression_dia=79.1,alerte_active=true,timestamp_esp=1783710199229",
+    "timestamp": 1783710199.2308636
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=729.4,timestamp_esp=1783710199229",
+    "timestamp": 1783710199.2310014
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710199229",
+    "timestamp": 1783710199.2311115
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=48.6,niveau_poche_ml=478.1,alarme=1,timestamp_esp=1783710199229",
+    "timestamp": 1783710199.23121
+  },
+  {
+    "topic": "clinique/chambre/CH-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation spo2=96.5,ecg_bpm=72.8,temperature=36.4,pression_sys=118.7,pression_dia=77.1,alerte_active=false,timestamp_esp=1783710199283",
+    "timestamp": 1783710199.2847407
+  },
+  {
+    "topic": "clinique/chambre/CH-002/co2",
+    "payload": "co2_ambiant,chambre_id=CH-002,device_id=ESP32_CH002,service=hospitalisation co2_ppm=659.6,timestamp_esp=1783710199283",
+    "timestamp": 1783710199.2849329
+  },
+  {
+    "topic": "clinique/chambre/CH-002/mouvement",
+    "payload": "mouvement,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710199283",
+    "timestamp": 1783710199.2850463
+  },
+  {
+    "topic": "clinique/chambre/CH-002/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-002,patient_id=PAT-102,perfuseur_id=PERF-CH-002,service=hospitalisation debit_ml_h=51.0,niveau_poche_ml=488.9,alarme=0,timestamp_esp=1783710199283",
+    "timestamp": 1783710199.2851648
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=95.3,ecg_bpm=77.5,temperature=36.6,pression_sys=129.7,pression_dia=79.3,alerte_active=false,timestamp_esp=1783710203757",
+    "timestamp": 1783710203.7600899
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=613.2,timestamp_esp=1783710203758",
+    "timestamp": 1783710203.7603948
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710203758",
+    "timestamp": 1783710203.7606516
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=50.7,niveau_poche_ml=477.8,alarme=0,timestamp_esp=1783710203758",
+    "timestamp": 1783710203.7608428
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.2,ecg_bpm=81.9,temperature=36.6,pression_sys=124.3,pression_dia=83.5,alerte_active=true,timestamp_esp=1783710204230",
+    "timestamp": 1783710204.2329626
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=583.4,timestamp_esp=1783710204230",
+    "timestamp": 1783710204.2334318
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710204232",
+    "timestamp": 1783710204.2355208
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=50.9,niveau_poche_ml=477.7,alarme=1,timestamp_esp=1783710204233",
+    "timestamp": 1783710204.236595
+  },
+  {
+    "topic": "clinique/energie/ups",
+    "payload": "energie_ups,device_id=ESP32_ENERGIE statut=\"SECTEUR\",niveau_pct=89.2,autonomie_min=40.2,en_charge=true,tension_v=212.4,timestamp_esp=1783710208205",
+    "timestamp": 1783710208.2066545
+  },
+  {
+    "topic": "clinique/energie/generateur",
+    "payload": "energie_generateur,device_id=ESP32_ENERGIE actif=false,charge_pct=0.0,statut=\"OFF\",timestamp_esp=1783710208205",
+    "timestamp": 1783710208.2067726
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=BLOC-A consommation_w=1141.3,timestamp_esp=1783710208205",
+    "timestamp": 1783710208.20691
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=BLOC-B consommation_w=923.7,timestamp_esp=1783710208205",
+    "timestamp": 1783710208.2070365
+  },
+  {
+    "topic": "clinique/energie/compteur",
+    "payload": "energie_compteur,device_id=ESP32_ENERGIE,circuit=URGENCE consommation_w=2791.5,timestamp_esp=1783710208205",
+    "timestamp": 1783710208.2071648
+  },
+  {
+    "topic": "clinique/chambre/CH-003/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation spo2=97.9,ecg_bpm=74.1,temperature=36.4,pression_sys=124.6,pression_dia=82.1,alerte_active=false,timestamp_esp=1783710208283",
+    "timestamp": 1783710208.2856474
+  },
+  {
+    "topic": "clinique/chambre/CH-003/co2",
+    "payload": "co2_ambiant,chambre_id=CH-003,device_id=ESP32_CH003,service=hospitalisation co2_ppm=670.7,timestamp_esp=1783710208283",
+    "timestamp": 1783710208.2858422
+  },
+  {
+    "topic": "clinique/chambre/CH-003/mouvement",
+    "payload": "mouvement,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710208284",
+    "timestamp": 1783710208.28601
+  },
+  {
+    "topic": "clinique/chambre/CH-003/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-003,patient_id=PAT-103,perfuseur_id=PERF-CH-003,service=hospitalisation debit_ml_h=48.6,niveau_poche_ml=488.3,alarme=0,timestamp_esp=1783710208284",
+    "timestamp": 1783710208.2862556
+  },
+  {
+    "topic": "clinique/securite/couloir-B/camera",
+    "payload": "camera_intrusion,zone=couloir-B,camera_id=CAM-couloir-B,device_id=ESP32_SECU intrusion_ia=false,mouvement_detecte=false,confiance_pct=0.7,timestamp_esp=1783710208314",
+    "timestamp": 1783710208.3153403
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=93.4,ecg_bpm=97.8,temperature=36.6,pression_sys=126.4,pression_dia=81.2,alerte_active=true,timestamp_esp=1783710208759",
+    "timestamp": 1783710208.7608242
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=691.0,timestamp_esp=1783710208759",
+    "timestamp": 1783710208.7609653
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=0,chute_detectee=1,timestamp_esp=1783710208759",
+    "timestamp": 1783710208.761134
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=48.0,niveau_poche_ml=477.2,alarme=0,timestamp_esp=1783710208759",
+    "timestamp": 1783710208.7613046
+  },
+  {
+    "topic": "clinique/chambre/CH-005/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation spo2=97.5,ecg_bpm=77.8,temperature=36.8,pression_sys=119.7,pression_dia=77.1,alerte_active=false,timestamp_esp=1783710208943",
+    "timestamp": 1783710208.944666
+  },
+  {
+    "topic": "clinique/chambre/CH-005/co2",
+    "payload": "co2_ambiant,chambre_id=CH-005,device_id=ESP32_CH005,service=hospitalisation co2_ppm=659.7,timestamp_esp=1783710208943",
+    "timestamp": 1783710208.9447637
+  },
+  {
+    "topic": "clinique/chambre/CH-005/mouvement",
+    "payload": "mouvement,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710208943",
+    "timestamp": 1783710208.9448512
+  },
+  {
+    "topic": "clinique/chambre/CH-005/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-005,patient_id=PAT-105,perfuseur_id=PERF-CH-005,service=hospitalisation debit_ml_h=49.0,niveau_poche_ml=488.8,alarme=0,timestamp_esp=1783710208943",
+    "timestamp": 1783710208.9449825
+  },
+  {
+    "topic": "clinique/chambre/CH-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation spo2=97.0,ecg_bpm=77.8,temperature=36.7,pression_sys=121.2,pression_dia=82.6,alerte_active=false,timestamp_esp=1783710208975",
+    "timestamp": 1783710208.976678
+  },
+  {
+    "topic": "clinique/chambre/CH-001/co2",
+    "payload": "co2_ambiant,chambre_id=CH-001,device_id=ESP32_CH001,service=hospitalisation co2_ppm=615.5,timestamp_esp=1783710208975",
+    "timestamp": 1783710208.9768085
+  },
+  {
+    "topic": "clinique/chambre/CH-001/mouvement",
+    "payload": "mouvement,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710208975",
+    "timestamp": 1783710208.976951
+  },
+  {
+    "topic": "clinique/chambre/CH-001/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-001,patient_id=PAT-101,perfuseur_id=PERF-CH-001,service=hospitalisation debit_ml_h=51.1,niveau_poche_ml=488.5,alarme=0,timestamp_esp=1783710208975",
+    "timestamp": 1783710208.9770901
+  },
+  {
+    "topic": "clinique/chambre/CH-004/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation spo2=97.9,ecg_bpm=71.4,temperature=36.7,pression_sys=120.6,pression_dia=80.0,alerte_active=false,timestamp_esp=1783710209015",
+    "timestamp": 1783710209.0174818
+  },
+  {
+    "topic": "clinique/chambre/CH-004/co2",
+    "payload": "co2_ambiant,chambre_id=CH-004,device_id=ESP32_CH004,service=hospitalisation co2_ppm=652.4,timestamp_esp=1783710209016",
+    "timestamp": 1783710209.017649
+  },
+  {
+    "topic": "clinique/chambre/CH-004/mouvement",
+    "payload": "mouvement,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710209016",
+    "timestamp": 1783710209.0177968
+  },
+  {
+    "topic": "clinique/chambre/CH-004/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-004,patient_id=PAT-104,perfuseur_id=PERF-CH-004,service=hospitalisation debit_ml_h=50.8,niveau_poche_ml=488.5,alarme=0,timestamp_esp=1783710209016",
+    "timestamp": 1783710209.017946
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.5,ecg_bpm=80.1,temperature=36.4,pression_sys=128.3,pression_dia=83.1,alerte_active=false,timestamp_esp=1783710209236",
+    "timestamp": 1783710209.2379227
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=600.5,timestamp_esp=1783710209236",
+    "timestamp": 1783710209.2380571
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710209236",
+    "timestamp": 1783710209.2382503
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=50.3,niveau_poche_ml=477.2,alarme=0,timestamp_esp=1783710209237",
+    "timestamp": 1783710209.2384415
+  },
+  {
+    "topic": "clinique/chambre/CH-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation spo2=96.4,ecg_bpm=71.9,temperature=36.4,pression_sys=124.7,pression_dia=81.4,alerte_active=false,timestamp_esp=1783710209284",
+    "timestamp": 1783710209.2866228
+  },
+  {
+    "topic": "clinique/chambre/CH-002/co2",
+    "payload": "co2_ambiant,chambre_id=CH-002,device_id=ESP32_CH002,service=hospitalisation co2_ppm=586.6,timestamp_esp=1783710209284",
+    "timestamp": 1783710209.2869637
+  },
+  {
+    "topic": "clinique/chambre/CH-002/mouvement",
+    "payload": "mouvement,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710209284",
+    "timestamp": 1783710209.2872293
+  },
+  {
+    "topic": "clinique/chambre/CH-002/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-002,patient_id=PAT-102,perfuseur_id=PERF-CH-002,service=hospitalisation debit_ml_h=50.6,niveau_poche_ml=488.5,alarme=0,timestamp_esp=1783710209284",
+    "timestamp": 1783710209.2874856
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=93.5,ecg_bpm=96.0,temperature=36.5,pression_sys=120.6,pression_dia=81.5,alerte_active=true,timestamp_esp=1783710213760",
+    "timestamp": 1783710213.762303
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=759.2,timestamp_esp=1783710213760",
+    "timestamp": 1783710213.762545
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=0,chute_detectee=1,timestamp_esp=1783710213760",
+    "timestamp": 1783710213.7627845
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=50.6,niveau_poche_ml=476.6,alarme=0,timestamp_esp=1783710213760",
+    "timestamp": 1783710213.7629828
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.4,ecg_bpm=81.0,temperature=36.6,pression_sys=121.7,pression_dia=83.6,alerte_active=false,timestamp_esp=1783710214238",
+    "timestamp": 1783710214.2453578
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=664.9,timestamp_esp=1783710214238",
+    "timestamp": 1783710214.245821
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710214239",
+    "timestamp": 1783710214.2462165
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=50.7,niveau_poche_ml=476.7,alarme=0,timestamp_esp=1783710214239",
+    "timestamp": 1783710214.2467387
+  },
+  {
+    "topic": "clinique/chambre/CH-003/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation spo2=97.5,ecg_bpm=75.5,temperature=36.8,pression_sys=118.8,pression_dia=79.4,alerte_active=false,timestamp_esp=1783710218284",
+    "timestamp": 1783710218.2870884
+  },
+  {
+    "topic": "clinique/chambre/CH-003/co2",
+    "payload": "co2_ambiant,chambre_id=CH-003,device_id=ESP32_CH003,service=hospitalisation co2_ppm=609.5,timestamp_esp=1783710218284",
+    "timestamp": 1783710218.2873027
+  },
+  {
+    "topic": "clinique/chambre/CH-003/mouvement",
+    "payload": "mouvement,chambre_id=CH-003,patient_id=PAT-103,device_id=ESP32_CH003,service=hospitalisation mouvement=1,chute_detectee=0,timestamp_esp=1783710218285",
+    "timestamp": 1783710218.2874382
+  },
+  {
+    "topic": "clinique/chambre/CH-003/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-003,patient_id=PAT-103,perfuseur_id=PERF-CH-003,service=hospitalisation debit_ml_h=49.2,niveau_poche_ml=487.8,alarme=0,timestamp_esp=1783710218286",
+    "timestamp": 1783710218.2875578
+  },
+  {
+    "topic": "clinique/chambre/SI-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs spo2=94.4,ecg_bpm=94.6,temperature=36.5,pression_sys=128.1,pression_dia=79.4,alerte_active=false,timestamp_esp=1783710218761",
+    "timestamp": 1783710218.7629118
+  },
+  {
+    "topic": "clinique/chambre/SI-002/co2",
+    "payload": "co2_ambiant,chambre_id=SI-002,device_id=ESP32_SI002,service=soins_intensifs co2_ppm=662.1,timestamp_esp=1783710218761",
+    "timestamp": 1783710218.7631476
+  },
+  {
+    "topic": "clinique/chambre/SI-002/mouvement",
+    "payload": "mouvement,chambre_id=SI-002,patient_id=PAT-202,device_id=ESP32_SI002,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710218761",
+    "timestamp": 1783710218.7633867
+  },
+  {
+    "topic": "clinique/chambre/SI-002/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-002,patient_id=PAT-202,perfuseur_id=PERF-SI-002,service=soins_intensifs debit_ml_h=50.4,niveau_poche_ml=476.1,alarme=0,timestamp_esp=1783710218761",
+    "timestamp": 1783710218.7635758
+  },
+  {
+    "topic": "clinique/chambre/CH-005/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation spo2=97.1,ecg_bpm=108.6,temperature=36.3,pression_sys=121.4,pression_dia=82.3,alerte_active=false,timestamp_esp=1783710218944",
+    "timestamp": 1783710218.9459145
+  },
+  {
+    "topic": "clinique/chambre/CH-005/co2",
+    "payload": "co2_ambiant,chambre_id=CH-005,device_id=ESP32_CH005,service=hospitalisation co2_ppm=712.5,timestamp_esp=1783710218944",
+    "timestamp": 1783710218.946089
+  },
+  {
+    "topic": "clinique/chambre/CH-005/mouvement",
+    "payload": "mouvement,chambre_id=CH-005,patient_id=PAT-105,device_id=ESP32_CH005,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710218944",
+    "timestamp": 1783710218.9462461
+  },
+  {
+    "topic": "clinique/chambre/CH-005/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-005,patient_id=PAT-105,perfuseur_id=PERF-CH-005,service=hospitalisation debit_ml_h=49.1,niveau_poche_ml=488.3,alarme=0,timestamp_esp=1783710218944",
+    "timestamp": 1783710218.9464948
+  },
+  {
+    "topic": "clinique/chambre/CH-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation spo2=97.5,ecg_bpm=77.8,temperature=36.6,pression_sys=121.5,pression_dia=79.3,alerte_active=false,timestamp_esp=1783710218976",
+    "timestamp": 1783710218.9779198
+  },
+  {
+    "topic": "clinique/chambre/CH-001/co2",
+    "payload": "co2_ambiant,chambre_id=CH-001,device_id=ESP32_CH001,service=hospitalisation co2_ppm=604.8,timestamp_esp=1783710218976",
+    "timestamp": 1783710218.9781337
+  },
+  {
+    "topic": "clinique/chambre/CH-001/mouvement",
+    "payload": "mouvement,chambre_id=CH-001,patient_id=PAT-101,device_id=ESP32_CH001,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710218976",
+    "timestamp": 1783710218.9783223
+  },
+  {
+    "topic": "clinique/chambre/CH-001/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-001,patient_id=PAT-101,perfuseur_id=PERF-CH-001,service=hospitalisation debit_ml_h=50.9,niveau_poche_ml=488.1,alarme=0,timestamp_esp=1783710218976",
+    "timestamp": 1783710218.9785018
+  },
+  {
+    "topic": "clinique/chambre/CH-004/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation spo2=97.9,ecg_bpm=71.0,temperature=36.4,pression_sys=117.3,pression_dia=82.3,alerte_active=false,timestamp_esp=1783710219016",
+    "timestamp": 1783710219.0189812
+  },
+  {
+    "topic": "clinique/chambre/CH-004/co2",
+    "payload": "co2_ambiant,chambre_id=CH-004,device_id=ESP32_CH004,service=hospitalisation co2_ppm=625.8,timestamp_esp=1783710219016",
+    "timestamp": 1783710219.0192747
+  },
+  {
+    "topic": "clinique/chambre/CH-004/mouvement",
+    "payload": "mouvement,chambre_id=CH-004,patient_id=PAT-104,device_id=ESP32_CH004,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710219017",
+    "timestamp": 1783710219.0194855
+  },
+  {
+    "topic": "clinique/chambre/CH-004/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-004,patient_id=PAT-104,perfuseur_id=PERF-CH-004,service=hospitalisation debit_ml_h=49.7,niveau_poche_ml=488.1,alarme=0,timestamp_esp=1783710219017",
+    "timestamp": 1783710219.019653
+  },
+  {
+    "topic": "clinique/chambre/SI-001/vitaux",
+    "payload": "vitaux_chambre,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs spo2=94.4,ecg_bpm=80.5,temperature=36.3,pression_sys=128.5,pression_dia=79.6,alerte_active=false,timestamp_esp=1783710219241",
+    "timestamp": 1783710219.2458692
+  },
+  {
+    "topic": "clinique/chambre/SI-001/co2",
+    "payload": "co2_ambiant,chambre_id=SI-001,device_id=ESP32_SI001,service=soins_intensifs co2_ppm=643.9,timestamp_esp=1783710219242",
+    "timestamp": 1783710219.2466066
+  },
+  {
+    "topic": "clinique/chambre/SI-001/mouvement",
+    "payload": "mouvement,chambre_id=SI-001,patient_id=PAT-201,device_id=ESP32_SI001,service=soins_intensifs mouvement=0,chute_detectee=0,timestamp_esp=1783710219242",
+    "timestamp": 1783710219.2470255
+  },
+  {
+    "topic": "clinique/chambre/SI-001/perfuseur",
+    "payload": "perfuseur,chambre_id=SI-001,patient_id=PAT-201,perfuseur_id=PERF-SI-001,service=soins_intensifs debit_ml_h=50.2,niveau_poche_ml=476.1,alarme=0,timestamp_esp=1783710219243",
+    "timestamp": 1783710219.2473874
+  },
+  {
+    "topic": "clinique/chambre/CH-002/vitaux",
+    "payload": "vitaux_chambre,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation spo2=96.7,ecg_bpm=71.1,temperature=36.4,pression_sys=116.4,pression_dia=80.3,alerte_active=false,timestamp_esp=1783710219286",
+    "timestamp": 1783710219.2897265
+  },
+  {
+    "topic": "clinique/chambre/CH-002/co2",
+    "payload": "co2_ambiant,chambre_id=CH-002,device_id=ESP32_CH002,service=hospitalisation co2_ppm=669.6,timestamp_esp=1783710219286",
+    "timestamp": 1783710219.290101
+  },
+  {
+    "topic": "clinique/chambre/CH-002/mouvement",
+    "payload": "mouvement,chambre_id=CH-002,patient_id=PAT-102,device_id=ESP32_CH002,service=hospitalisation mouvement=0,chute_detectee=0,timestamp_esp=1783710219287",
+    "timestamp": 1783710219.290327
+  },
+  {
+    "topic": "clinique/chambre/CH-002/perfuseur",
+    "payload": "perfuseur,chambre_id=CH-002,patient_id=PAT-102,perfuseur_id=PERF-CH-002,service=hospitalisation debit_ml_h=51.3,niveau_poche_ml=488.0,alarme=0,timestamp_esp=1783710219287",
+    "timestamp": 1783710219.2906287
+  }
+]
