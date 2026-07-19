@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "author": "Clinique Connectée — Sécurité UFHB IoT 2025-2026",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_porte",
+      "top": 120,
+      "left": -180,
+      "attrs": {
+        "color": "green",
+        "label": "Ouverture Porte"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_alarme",
+      "top": 60,
+      "left": 220,
+      "attrs": {
+        "color": "red",
+        "label": "Alarme Intrusion"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 88,
+      "left": 160,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_acces",
+      "top": 140,
+      "left": 220,
+      "attrs": {
+        "color": "green",
+        "label": "Accès Autorisé"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 168,
+      "left": 160,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX",  "$serialMonitor:RX", "", [] ],
+    [ "esp:RX",  "$serialMonitor:TX", "", [] ],
+
+    [ "btn_porte:1.l", "esp:GND.2",  "black",  [ "v0" ] ],
+    [ "btn_porte:2.r", "esp:0",      "green",  [ "v0" ] ],
+
+    [ "esp:2",   "r1:1",            "red",    [ "v0" ] ],
+    [ "r1:2",    "led_alarme:A",    "red",    [ "v0" ] ],
+    [ "led_alarme:C", "esp:GND.3",  "black",  [ "v0" ] ],
+
+    [ "esp:15",  "r2:1",            "green",  [ "v0" ] ],
+    [ "r2:2",    "led_acces:A",     "green",  [ "v0" ] ],
+    [ "led_acces:C", "esp:GND.4",   "black",  [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

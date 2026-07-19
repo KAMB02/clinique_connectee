@@ -1,0 +1,435 @@
+# ══════════════════════════════════════════════════════════════════════
+#  CLINIQUE CONNECTÉE — docker-compose.yaml
+#  Stack complète IoT Hackathon — M1 RIST/BD-GL UFHB 2025-2026
+#
+#  Lancement : docker-compose up -d
+#  Arrêt     : docker-compose down
+#  Logs      : docker-compose logs -f [service]
+#
+#  Accès :
+#    Grafana      → http://localhost:3000  (admin / tp-iot26@)
+#    InfluxDB     → http://localhost:8086  (admin / tp-iot26@)
+#    Node-RED     → http://localhost:1880
+#    Mongo-Express→ http://localhost:8081
+#    MQTT         → localhost:8883
+# ══════════════════════════════════════════════════════════════════════
+
+services:
+
+  # ── 1. Broker MQTT (phase vulnérable J1-J4) ──────────────────────
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: clinique_mosquitto
+    ports:
+      - '8883:8883'   # MQTT TLS
+      - '9002:9001'   # WebSocket MQTT (dashboard React)
+    volumes:
+      - ./mosquitto/config:/mosquitto/config:ro
+      - ./certs:/mosquitto/certs
+      - mosquitto_data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 2. Telegraf : MQTT → InfluxDB ────────────────────────────────
+  telegraf:
+    image: telegraf:1.28
+    container_name: clinique_telegraf
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    depends_on:
+      - mosquitto
+      - influxdb
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 3. InfluxDB 2.7 (time-series capteurs) ───────────────────────
+  influxdb:
+    image: influxdb:2.7
+    container_name: clinique_influxdb
+    ports:
+      - '8086:8086'
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=tp-iot26@
+      - DOCKER_INFLUXDB_INIT_ORG=clinique_abidjan
+      - DOCKER_INFLUXDB_INIT_BUCKET=mesures_capteurs
+      - DOCKER_INFLUXDB_INIT_RETENTION=720h   # 30 jours
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=mon-super-token-123456789
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+      - ./influxdb/init:/docker-entrypoint-initdb.d
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 4. MongoDB 7 (métadonnées, alertes, DPI) ─────────────────────
+  mongodb:
+    image: mongo:7
+    container_name: clinique_mongodb
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=tp-iot26@
+      - MONGO_INITDB_DATABASE=clinique_db
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongodb/init.js:/docker-entrypoint-initdb.d/init.js
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 5. Mongo Express (UI MongoDB) ────────────────────────────────
+  mongo-express:
+    image: mongo-express:1.0
+    container_name: clinique_mongo_express
+    ports:
+      - '8081:8081'
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=tp-iot26@
+      - ME_CONFIG_MONGODB_URL=mongodb://admin:tp-iot26%40@clinique_mongodb:27017/
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=tp-iot26@
+    depends_on: [mongodb]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 6. Node-RED (pipeline traitement + alertes + routage) ────────
+  nodered:
+    image: nodered/node-red:3.1
+    container_name: clinique_nodered
+    ports:
+      - '1880:1880'
+    environment:
+      - TZ=Africa/Abidjan
+      - NODE_RED_ENABLE_SAFE_MODE=false
+    volumes:
+      - nodered_data:/data
+    depends_on:
+      - mosquitto
+      - influxdb
+      - mongodb
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 7. Redis Master (cache + pub/sub temps réel) ──────────────────
+  redis_master:
+    image: redis:7-alpine
+    container_name: clinique_redis_master
+    command: redis-server --requirepass tp-iot26@ --appendonly yes
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_master_data:/data
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 8. Redis Replica 1 ───────────────────────────────────────────
+  redis-replica-1:
+    image: redis:7-alpine
+    container_name: clinique_redis_replica1
+    command: >
+      redis-server
+      --replicaof clinique_redis_master 6379
+      --requirepass tp-iot26@
+      --masterauth tp-iot26@
+    ports:
+      - '6380:6379'
+    depends_on: [redis_master]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 9. Redis Replica 2 ───────────────────────────────────────────
+  redis-replica-2:
+    image: redis:7-alpine
+    container_name: clinique_redis_replica2
+    command: >
+      redis-server
+      --replicaof clinique_redis_master 6379
+      --requirepass tp-iot26@
+      --masterauth tp-iot26@
+    ports:
+      - '6381:6379'
+    depends_on: [redis_master]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 10. Redis Sentinel 1 ─────────────────────────────────────────
+  redis-sentinel-1:
+    image: redis:7-alpine
+    container_name: clinique_sentinel1
+    command: >
+      sh -c "
+      until getent hosts redis_master > /dev/null 2>&1; do
+        echo '[Sentinel] Attente DNS redis master...'; sleep 2;
+      done &&
+      redis-sentinel /etc/redis/sentinel.conf
+      "
+    ports:
+      - '26379:26379'
+    volumes:
+      - ./redis/sentinel1:/etc/redis
+    depends_on: [redis_master, redis-replica-1, redis-replica-2]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 11. Redis Sentinel 2 ─────────────────────────────────────────
+  redis-sentinel-2:
+    image: redis:7-alpine
+    container_name: clinique_sentinel2
+    command: >
+      sh -c "
+      until getent hosts redis_master > /dev/null 2>&1; do
+        echo '[Sentinel] Attente DNS redis master...'; sleep 2;
+      done &&
+      redis-sentinel /etc/redis/sentinel.conf
+      "
+    ports:
+      - '26380:26379'
+    volumes:
+      - ./redis/sentinel2:/etc/redis
+    depends_on: [redis_master, redis-replica-1, redis-replica-2]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 12. Redis Sentinel 3 ─────────────────────────────────────────
+  redis-sentinel-3:
+    image: redis:7-alpine
+    container_name: clinique_sentinel3
+    command: >
+      sh -c "
+      until getent hosts redis_master > /dev/null 2>&1; do
+        echo '[Sentinel] Attente DNS redis master...'; sleep 2;
+      done &&
+      redis-sentinel /etc/redis/sentinel.conf
+      "
+    ports:
+      - '26381:26379'
+    volumes:
+      - ./redis/sentinel3:/etc/redis
+    depends_on: [redis_master, redis-replica-1, redis-replica-2]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 13. FastAPI Instance 1 ────────────────────────────────────────
+  api-1:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: clinique_api_1
+    environment:
+      - INSTANCE_ID=1
+      - INFLUX_URL=http://clinique_influxdb:8086
+      - INFLUX_TOKEN=mon-super-token-123456789
+      - INFLUX_ORG=clinique_abidjan
+      - INFLUX_BUCKET=mesures_capteurs
+      - MONGO_URI=mongodb://admin:tp-iot26%40@clinique_mongodb:27017/clinique_db?authSource=admin
+
+      - REDIS_SENTINEL_HOSTS=clinique_sentinel1:26379,clinique_sentinel2:26379,clinique_sentinel3:26379
+      - REDIS_MASTER_NAME=clinique_master
+      - REDIS_PASSWORD=tp-iot26@
+      - JWT_SECRET=clinique_jwt_secret_tres_securise_2025
+      - MQTT_BROKER=clinique_mosquitto
+      - MQTT_PORT=8883
+    ports:
+      - '8001:8000'
+    depends_on: [influxdb, mongodb, redis_master, mosquitto]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 14. FastAPI Instance 2 ────────────────────────────────────────
+  api-2:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: clinique_api_2
+    environment:
+      - INSTANCE_ID=2
+      - INFLUX_URL=http://clinique_influxdb:8086
+      - INFLUX_TOKEN=mon-super-token-123456789
+      - INFLUX_ORG=clinique_abidjan
+      - INFLUX_BUCKET=mesures_capteurs
+      - MONGO_URI=mongodb://admin:tp-iot26%40@clinique_mongodb:27017/clinique_db?authSource=admin
+
+      - REDIS_SENTINEL_HOSTS=clinique_sentinel1:26379,clinique_sentinel2:26379,clinique_sentinel3:26379
+      - REDIS_MASTER_NAME=clinique_master
+      - REDIS_PASSWORD=tp-iot26@
+      - JWT_SECRET=clinique_jwt_secret_tres_securise_2025
+      - MQTT_BROKER=clinique_mosquitto
+      - MQTT_PORT=8883
+    ports:
+      - '8002:8000'
+    depends_on: [influxdb, mongodb, redis_master, mosquitto]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 15. FastAPI Instance 3 ────────────────────────────────────────
+  api-3:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: clinique_api_3
+    environment:
+      - INSTANCE_ID=3
+      - INFLUX_URL=http://clinique_influxdb:8086
+      - INFLUX_TOKEN=mon-super-token-123456789
+      - INFLUX_ORG=clinique_abidjan
+      - INFLUX_BUCKET=mesures_capteurs
+      - MONGO_URI=mongodb://admin:tp-iot26%40@clinique_mongodb:27017/clinique_db?authSource=admin
+
+      - REDIS_SENTINEL_HOSTS=clinique_sentinel1:26379,clinique_sentinel2:26379,clinique_sentinel3:26379
+      - REDIS_MASTER_NAME=clinique_master
+      - REDIS_PASSWORD=tp-iot26@
+      - JWT_SECRET=clinique_jwt_secret_tres_securise_2025
+      - MQTT_BROKER=clinique_mosquitto
+      - MQTT_PORT=8883
+    ports:
+      - '8003:8000'
+    depends_on: [influxdb, mongodb, redis_master, mosquitto]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 16. Nginx — Load Balancer (3 instances FastAPI) ───────────────
+  nginx:
+    image: nginx:alpine
+    container_name: clinique_nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    depends_on: [api-1, api-2, api-3]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 17. Grafana (dashboards métriques) ───────────────────────────
+  grafana:
+    image: grafana/grafana:10.0.0
+    container_name: clinique_grafana
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=tp-iot26@
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    depends_on: [influxdb]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 18. Prometheus (métriques système + API) ──────────────────────
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: clinique_prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 19. cAdvisor (métriques conteneurs Docker) ───────────────────
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: clinique_cadvisor
+    ports:
+      - '8082:8080'
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 20. Elasticsearch (logs ELK) ─────────────────────────────────
+  elasticsearch:
+    image: elasticsearch:8.12.0
+    container_name: clinique_elasticsearch
+    ports:
+      - '9200:9200'
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 21. Logstash (pipeline logs → ES) ────────────────────────────
+  logstash:
+    image: logstash:8.12.0
+    container_name: clinique_logstash
+    ports:
+      - '5044:5044'
+    volumes:
+      - ./elk/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+    depends_on: [elasticsearch]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 22. Kibana (visualisation logs) ──────────────────────────────
+  kibana:
+    image: kibana:8.12.0
+    container_name: clinique_kibana
+    ports:
+      - '5601:5601'
+    environment:
+      - ELASTICSEARCH_HOSTS=http://clinique_elasticsearch:9200
+    depends_on: [elasticsearch]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 23. Filebeat (expédition logs conteneurs → Logstash) ──────────
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.12.0
+    container_name: clinique_filebeat
+    user: root
+    volumes:
+      - ./elk/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    command: ["--strict.perms=false"]
+    depends_on: [logstash]
+    networks: [clinique_net]
+    restart: unless-stopped
+
+  # ── 24. Simulateur capteurs (dockerisé — plus besoin de le lancer à la main) ──
+  simulateur:
+    build:
+      context: ./simulateur
+      dockerfile: Dockerfile
+    container_name: clinique_simulateur
+    volumes:
+      - ./certs:/app/certs:ro
+    depends_on:
+      - mosquitto
+    networks: [clinique_net]
+    restart: unless-stopped
+
+    
+# ── Volumes persistants ───────────────────────────────────────────
+volumes:
+  mosquitto_data:
+  influxdb_data:
+  mongodb_data:
+  nodered_data:
+  redis_master_data:
+  grafana_data:
+  prometheus_data:
+  es_data:
+
+# ── Réseau interne ────────────────────────────────────────────────
+networks:
+  clinique_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

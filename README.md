@@ -1,10 +1,14 @@
+<<<<<<< HEAD
+# clinique_connectee
+Infrastructure IoT sécurisée pour le monitoring hospitalier — MQTT/TLS, pipeline de données temps réel et tests d'intrusion (ARP spoofing, replay, MITM) sur une simulation de clinique connectée.
+=======
 # Clinique Connectée — Infrastructure IoT & Data Pipeline
 
 > Mini-projet IoT — Master 1 BD-GL · UFHB Abidjan Cocody  
 > Simulation d'une infrastructure hospitalière intelligente avec collecte de données en temps réel, visualisation et alertes automatisées.
 
-**Équipe BD-GL** : [DINGUI Yannik](https://github.com/bigya2nick) · [TRAORE Siaka](https://github.com/Chacool225)  
-**Équipe RIST (sécurité)** : [KADJO Allouan](https://github.com/KAMB02) · [GNETO Schiphra](https://github.com/ELISA734) 
+**Équipe BD-GL** : Yannick-Paterne · Traore Siaka  
+**Équipe RIST (sécurité)** : Kadjo Moise · Gneto Schiphra 
 
 ---
 
@@ -49,7 +53,7 @@ Capteurs ESP32 / Simulateur Python
 | Monitoring | Prometheus + ELK | 8.12.0 | Métriques + logs |
 | Simulation | Python 3 / Wokwi | - | Firmware ESP32 (PoC) + simulateur `paho-mqtt` |
 | Dashboard web | React 18 + Vite | 18.3 / 6.0 | Interface live (auth JWT auto + SSE + fallback simulateur) |
-| Conteneurs | Docker Compose | - | 22 services |
+| Conteneurs | Docker Compose | - | 24 services (dont simulateur dockerisé) |
 
 ---
 
@@ -160,7 +164,7 @@ cd mini-projet-iot
 docker compose up -d
 ```
 
-Vérifier que les 22 services sont actifs :
+Vérifier que les 24 services sont actifs :
 
 ```bash
 docker compose ps
@@ -194,29 +198,25 @@ Redémarrer Telegraf :
 docker restart clinique_telegraf
 ```
 
-### 5. Installer les dépendances Python du simulateur
+### 5. Simulateur de capteurs — dockerisé, démarre automatiquement
+
+Depuis la mise à jour du 15/07/2026, le simulateur tourne comme un service Docker à part entière (`clinique_simulateur`, 24ᵉ service) — **plus besoin de l'installer ni de le lancer à la main**. Il démarre avec `docker compose up -d` (étape 2) et cible directement `clinique_mosquitto:8883` sur le réseau interne, avec les certificats montés en lecture seule depuis `./certs`.
+
+Vérifier qu'il tourne :
 
 ```bash
-pip install paho-mqtt
-```
-
-### 6. Lancer le simulateur de capteurs
-
-```bash
-# Simulation standard (7 chambres)
-py simulateur_clinique_v2.py
-
-# Avec paramètres explicites
-py simulateur_clinique_v2.py --broker localhost --port 8883 --interval 10
+docker compose logs simulateur --tail 30
 ```
 
 Vérifier les publications en temps réel :
 
 ```bash
-docker exec clinique_mosquitto mosquitto_sub -t "clinique/#" -u telegraf_agent -P clinique2026 -v
+docker exec clinique_mosquitto mosquitto_sub -h localhost -p 8883 --cafile /mosquitto/certs/server.crt -u telegraf_agent -P clinique2026 -t "clinique/#" -v
 ```
 
-### 7. Importer les dashboards Grafana
+*(L'ancien script `simulateur_clinique.py` lancé à la main avec `py simulateur_clinique.py --broker localhost` reste utilisable en secours si besoin — le code est identique, seul le mode de lancement change.)*
+
+### 6. Importer les dashboards Grafana
 
 1. Ouvrir Grafana : [http://localhost:3000](http://localhost:3000) (Id dans le compose.yaml )
 2. `+` → Import → Upload JSON pour chaque fichier dans `dashboard_grafana/`
@@ -231,13 +231,13 @@ docker exec clinique_mosquitto mosquitto_sub -t "clinique/#" -u telegraf_agent -
 | `db5_eco.json` | Écologie & consommation |
 | `db6_overview.json` | Vue globale clinique |
 
-### 8. Configurer Node-RED
+### 7. Configurer Node-RED
 
 1. Ouvrir Node-RED : [http://localhost:1880](http://localhost:1880)
 2. Importer le flow : `node-red/flow_alertes.json`
 3. Vérifier les nœuds MQTT avec les credentials `nodered_agent / clinique2026`
 
-### 9. Lancer le dashboard React
+### 8. Lancer le dashboard React
 
 ```bash
 cd react-dashboard
@@ -265,6 +265,12 @@ Au chargement, le dashboard :
 
 Le badge en haut à droite indique l'état réel : 🟢 **Live · IoT actif** (données InfluxDB/MongoDB réelles) ou 🟠 **Simulation** (fallback navigateur, aucune connexion au backend).
 
+### Onglets
+
+- **Vue globale / Patients / Sécurité / Énergie / Alertes** : vues temps réel, mises à jour via SSE + polling REST.
+- **🗺️ Carte** : mini carte géographique réelle (OpenStreetMap via `react-leaflet`, marqueur sur Cocody, Abidjan) **au-dessus** du plan intérieur SVG de la clinique (7 chambres + zone sécurité + local énergie).
+- **📊 Historique** (nouveau) : sélecteur de chambre + plage (1h/6h/24h/7j) avec 4 graphes (`recharts`) — SpO2, fréquence cardiaque, température, pression artérielle — et une liste d'alertes passées filtrable par niveau/chambre/type/date, alimentés par `GET /api/stats/vitaux/{chambre_id}/historique` et `GET /api/alertes/historique`.
+
 ### Structure
 
 ```
@@ -275,13 +281,15 @@ react-dashboard/
 │   ├── components/
 │   │   ├── Topbar.jsx            # Navigation + badge statut live/simu
 │   │   ├── ToastContainer.jsx    # Notifications
-│   │   ├── Patients.jsx / Securite.jsx / Energie.jsx / Alertes.jsx / Carte.jsx
+│   │   ├── Patients.jsx / Securite.jsx / Energie.jsx / Alertes.jsx
+│   │   ├── Carte.jsx             # Carte géo (react-leaflet) + plan intérieur SVG
+│   │   ├── Historique.jsx        # Graphes vitaux (recharts) + alertes filtrables
 │   │   └── ui.jsx                # KpiCard, Card, Gauge, ProgressBar, StatusDot...
 │   └── utils/
-│       ├── liveData.js           # autoLogin, connectSSE, fetchAllVitaux, fetchEnergie, ackAlerte
+│       ├── liveData.js           # autoLogin, connectSSE, fetch*, fetch*Historique, ackAlerte
 │       └── helpers.js            # generateTick (simulateur), constantes, couleurs
 ├── vite.config.js                # Proxy /api → localhost:8000 en dev
-└── package.json
+└── package.json                  # + leaflet, react-leaflet, recharts
 ```
 
 ### Configuration
@@ -322,6 +330,11 @@ Historique des blocages rencontrés pour le passage en mode live, utile en cas d
 | Dashboard repasse en "Simulation" après 5s même quand le live fonctionne, sans aucune erreur | Le `setTimeout` de secours (5s) dans `App.jsx` lisait `dataStatus` capturé dans une closure figée sur sa valeur initiale (`"connecting"`), donc il forçait toujours le fallback | Ajout d'un `ref` (`statusRef`) synchronisé à chaque changement de statut, lu par le timer à la place de l'état React |
 | Warning React "two children with the same key" sur les toasts | `id` généré avec `Date.now()` seul, collision possible en cas de double appel rapproché (React StrictMode) | `id` composé de `Date.now()` + compteur incrémental |
 | Login parfois lent au tout premier démarrage (`signal timed out`) | Le hash bcrypt du mot de passe démo est calculé paresseusement au 1er login (coût CPU synchrone au cold-start) | Hash pré-calculé au démarrage de l'API (`lifespan`), plus de coût au premier appel |
+| Plus aucune donnée dans InfluxDB/Grafana après une modif du simulateur (`field type conflict... is type integer, already exists as type float`) | Le simulateur envoyait des entiers sans suffixe `i` (Line Protocol), donc écrits comme `float` ; une fois corrigé pour envoyer de vrais `integer`, ça entrait en conflit avec le type déjà verrouillé par les anciennes données du même champ | Bucket `mesures_capteurs` supprimé puis recréé (`influx bucket delete` / `create`) — acceptable car données de simulation, pas de valeur à conserver |
+| `unsupported input type for mean aggregate: boolean` dans InfluxDB Data Explorer / panneau Grafana "porte_ouverte" | Agrégation `mean()` appliquée à un champ booléen (`porte_ouverte`, `mouvement_detecte`...) — on ne peut pas faire une moyenne de vrai/faux | Panneau Grafana corrigé en `fn: last` ; en exploration manuelle, changer l'agrégation par défaut "mean" → "last" pour tout champ booléen |
+| Conteneur `clinique_filebeat` ne démarre pas (`mount ... not a directory`) | Le fichier `elk/filebeat.yml` n'existait pas sur l'hôte ; Docker a créé un **dossier vide** à sa place lors d'une tentative précédente, cassant le bind mount fichier→fichier | Supprimer le dossier créé par erreur et y placer un vrai fichier `filebeat.yml` |
+| Flow Node-RED (`flow_alertes.json`) ne recevait jamais rien | Broker configuré sur le port `1883` en clair, alors que Mosquitto n'écoute qu'en TLS sur `8883` ; topics incomplets (`clinique/+/sante` au lieu de `clinique/chambre/+/vitaux`, etc.) ; `datatype: "json"` alors que les payloads sont en Line Protocol brut | Broker basculé en TLS `8883`, topics corrigés (dont ajout `clinique/acces/#` et `appel_securite` séparé), parsing Line Protocol ajouté dans chaque noeud `function` |
+| Bandeau "Failed to fetch" affiché dans l'onglet Historique alors que les graphes montrent bien des données | Deux requêtes concurrentes au montage (React StrictMode) : si la 1ʳᵉ échoue et la 2ᵉ réussit, l'erreur de la 1ʳᵉ reste affichée même si les bonnes données sont déjà arrivées | Garde anti-race avec compteur de requête (`reqIdRef`) — seule la dernière requête lancée peut mettre à jour l'état |
 
 ---
 
@@ -329,7 +342,7 @@ Historique des blocages rencontrés pour le passage en mode live, utile en cas d
 
 ```
 mini-projet-iot/
-├── docker-compose.yaml          # 22 services orchestrés
+├── docker-compose.yaml          # 24 services orchestrés (dont simulateur)
 ├── simulateur_clinique.py    # Simulateur Python 7 chambres + auth
 ├── setup_auth.sh                # Configuration auth MQTT automatique
 ├── Wokwi-README.md              # Documentation firmware ESP32
@@ -376,6 +389,9 @@ mini-projet-iot/
 │
 └── wokwigw/                     # Wokwi gateway config
 ├── Attaque-README.md            # Documentation des scripts d'attaque
+├── simulateur/                   # Simulateur capteurs dockerisé (service 24)
+│   ├── Dockerfile
+│   └── simulateur_clinique.py
 │
 └── react-dashboard/              # Dashboard web (voir section dédiée ci-dessus)
     ├── src/
@@ -526,7 +542,7 @@ cd wokwigw
 
 | Tâche | Équipe | Statut |
 |---|---|---|
-| Architecture Docker 22 services | BD-GL | ✅ Terminé |
+| Architecture Docker 24 services (simulateur inclus) | BD-GL | ✅ Terminé |
 | Firmware ESP32 ×3 (Wokwi) | BD-GL | ✅ Terminé |
 | Simulateur Python 7 chambres | BD-GL | ✅ Terminé |
 | Pipeline Telegraf → InfluxDB | BD-GL | ✅ Terminé |
@@ -534,8 +550,8 @@ cd wokwigw
 | Node-RED routing alertes | BD-GL | ✅ Terminé |
 | FastAPI ×3 endpoints (auth JWT, patients, alertes SSE, stats, chambres) | BD-GL | ✅ Terminé |
 | React Dashboard (live + fallback simulateur) | BD-GL | ✅ Terminé |
-| Analyse STRIDE | RIST | 🔄 En cours |
-| Auth MQTT (TLS/X.509) | RIST | 🔄 En cours |
+| Analyse STRIDE | RIST | ✅ Terminé |
+| Auth MQTT (TLS/X.509) | RIST |✅ Terminé |
 | MQTT ACLs | BD-GL + RIST | ✅ Configuré |
 | Tests Wireshark / MITM | RIST | ⏳ À faire |
 
@@ -551,3 +567,4 @@ cd wokwigw
 ---
 
 *Projet réalisé dans le cadre du hackathon IoT — Master 1 BD-GL & RIST · UFHB · Juin 2026*
+>>>>>>> 28bd379 (Clinique Connectée — projet complet (IoT + API + dashboard React))
