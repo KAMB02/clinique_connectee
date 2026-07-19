@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "author": "Clinique Connectée — Énergie UFHB IoT 2025-2026",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot_ups",
+      "top": -60,
+      "left": -180,
+      "attrs": {
+        "label": "Niveau Batterie UPS"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_ups",
+      "top": 60,
+      "left": 220,
+      "attrs": {
+        "color": "green",
+        "label": "Secteur OK"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 88,
+      "left": 160,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_groupe",
+      "top": 140,
+      "left": 220,
+      "attrs": {
+        "color": "yellow",
+        "label": "Générateur Actif"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 168,
+      "left": 160,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX",  "$serialMonitor:RX", "", [] ],
+    [ "esp:RX",  "$serialMonitor:TX", "", [] ],
+
+    [ "pot_ups:VCC", "esp:3V3",    "red",    [ "v0" ] ],
+    [ "pot_ups:GND", "esp:GND.1",  "black",  [ "v0" ] ],
+    [ "pot_ups:SIG", "esp:34",     "orange", [ "v0" ] ],
+
+    [ "esp:2",   "r1:1",          "green",  [ "v0" ] ],
+    [ "r1:2",    "led_ups:A",     "green",  [ "v0" ] ],
+    [ "led_ups:C",   "esp:GND.2", "black",  [ "v0" ] ],
+
+    [ "esp:15",  "r2:1",          "yellow", [ "v0" ] ],
+    [ "r2:2",    "led_groupe:A",  "yellow", [ "v0" ] ],
+    [ "led_groupe:C", "esp:GND.3","black",  [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

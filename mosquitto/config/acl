@@ -1,0 +1,38 @@
+# ════════════════════════════════════════════════════════════════
+#  MOSQUITTO ACL — Contrôle d'accès par device
+#  Clinique Connectée — clinique2026
+# ════════════════════════════════════════════════════════════════
+
+# ── Capteurs chambre — publient leurs topics, lisent rien
+user esp32_chambre
+topic write clinique/chambre/#
+topic write clinique/alerte/controleur
+
+# ── Capteurs sécurité
+user esp32_securite
+topic write clinique/acces/#
+topic write clinique/securite/#
+topic write clinique/alerte/controleur
+
+# ── Capteurs énergie
+user esp32_energie
+topic write clinique/energie/#
+topic write clinique/alerte/controleur
+
+# ── Contrôleur sécurité — lit toutes les alertes
+user esp32_controleur
+topic read clinique/#
+topic write clinique/alerte/controleur
+
+# ── Telegraf — lit tout pour ingestion InfluxDB
+user telegraf_agent
+topic read clinique/#
+
+# ── Node-RED — lit tout et peut écrire des commandes
+user nodered_agent
+topic read clinique/#
+topic write clinique/commande/#
+
+# ── Admin — accès complet (Kadjo / Schiphra pour les tests sécu)
+user admin_clinique
+topic readwrite #

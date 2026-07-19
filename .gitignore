@@ -1,8 +1,8 @@
-# ══════════════════════════════════════════════
-#  .gitignore — Clinique Connectée / back-end
-# ══════════════════════════════════════════════
+# ══════════════════════════════════════════════════════
+#  Clinique Connectée — .gitignore
+# ══════════════════════════════════════════════════════
 
-# Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *.pyo
@@ -75,11 +75,87 @@ appendonly.aof
 # MongoDB data
 mongodb/data/
 
-# InfluxDB data
-influxdb/data/
+# Cython debug symbols
+cython_debug/
 
-# Captures / captures réseau
-*.pcap
-*.pcapng
-capture.json
-attaque/capture.json
+.abstra/
+
+tempCodeRunnerFile.py
+
+# Ruff stuff:
+.ruff_cache/
+
+# PyPI configuration file
+.pypirc
+
+# Marimo
+marimo/_static/
+marimo/_lsp/
+__marimo__/
+
+# Streamlit
+.streamlit/secrets.toml
+=======
+
+
+# ── Secrets / certificats ──────────────────────────────
+certs/*.key
+certs/*.pem
+*.env
+.env
+.env.*
+!.env.example
+
+# ── Python (api/, simulateur/) ─────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+
+# ── Node / React dashboard ──────────────────────────────
+node_modules/
+react-dashboard/node_modules/
+react-dashboard/dist/
+react-dashboard/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Docker / volumes locaux ─────────────────────────────
+mosquitto/log/*
+!mosquitto/log/.gitkeep
+mosquitto/data/*
+!mosquitto/data/.gitkeep
+
+# ── Node-RED (contient des credentials chiffrés) ───────
+node-red/node_modules/
+node-red/.config.json
+node-red/.config.nodes.json
+node-red/*_cred.json
+
+# ── Redis dumps ──────────────────────────────────────────
+*.rdb
+*.aof
+appendonlydir/
+
+# ── Logs divers ──────────────────────────────────────────
+*.log
+logs/
+
+# ── IDE / OS ─────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ── Build artefacts divers ───────────────────────────────
+*.pio/
+.pio/
+build/
+dist/
