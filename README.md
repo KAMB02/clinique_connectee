@@ -1,14 +1,10 @@
-<<<<<<< HEAD
-# clinique_connectee
-Infrastructure IoT sécurisée pour le monitoring hospitalier — MQTT/TLS, pipeline de données temps réel et tests d'intrusion (ARP spoofing, replay, MITM) sur une simulation de clinique connectée.
-=======
 # Clinique Connectée — Infrastructure IoT & Data Pipeline
 
 > Mini-projet IoT — Master 1 BD-GL · UFHB Abidjan Cocody  
 > Simulation d'une infrastructure hospitalière intelligente avec collecte de données en temps réel, visualisation et alertes automatisées.
 
-**Équipe BD-GL** : Yannick-Paterne · Traore Siaka  
-**Équipe RIST (sécurité)** : Kadjo Moise · Gneto Schiphra 
+**Équipe BD-GL** : [DINGUI Yannik](https://github.com/bigya2nick) · [TRAORE Siaka](https://github.com/Chacool225)  
+**Équipe RIST (sécurité)** : [KADJO Allouan](https://github.com/KAMB02) · [GNETO Schiphra](https://github.com/ELISA734) 
 
 ---
 
@@ -53,7 +49,7 @@ Capteurs ESP32 / Simulateur Python
 | Monitoring | Prometheus + ELK | 8.12.0 | Métriques + logs |
 | Simulation | Python 3 / Wokwi | - | Firmware ESP32 (PoC) + simulateur `paho-mqtt` |
 | Dashboard web | React 18 + Vite | 18.3 / 6.0 | Interface live (auth JWT auto + SSE + fallback simulateur) |
-| Conteneurs | Docker Compose | - | 24 services (dont simulateur dockerisé) |
+| Conteneurs | Docker Compose | - | 22 services |
 
 ---
 
@@ -164,7 +160,7 @@ cd mini-projet-iot
 docker compose up -d
 ```
 
-Vérifier que les 24 services sont actifs :
+Vérifier que les 22 services sont actifs :
 
 ```bash
 docker compose ps
@@ -198,25 +194,29 @@ Redémarrer Telegraf :
 docker restart clinique_telegraf
 ```
 
-### 5. Simulateur de capteurs — dockerisé, démarre automatiquement
-
-Depuis la mise à jour du 15/07/2026, le simulateur tourne comme un service Docker à part entière (`clinique_simulateur`, 24ᵉ service) — **plus besoin de l'installer ni de le lancer à la main**. Il démarre avec `docker compose up -d` (étape 2) et cible directement `clinique_mosquitto:8883` sur le réseau interne, avec les certificats montés en lecture seule depuis `./certs`.
-
-Vérifier qu'il tourne :
+### 5. Installer les dépendances Python du simulateur
 
 ```bash
-docker compose logs simulateur --tail 30
+pip install paho-mqtt
+```
+
+### 6. Lancer le simulateur de capteurs
+
+```bash
+# Simulation standard (7 chambres)
+py simulateur_clinique_v2.py
+
+# Avec paramètres explicites
+py simulateur_clinique_v2.py --broker localhost --port 8883 --interval 10
 ```
 
 Vérifier les publications en temps réel :
 
 ```bash
-docker exec clinique_mosquitto mosquitto_sub -h localhost -p 8883 --cafile /mosquitto/certs/server.crt -u telegraf_agent -P clinique2026 -t "clinique/#" -v
+docker exec clinique_mosquitto mosquitto_sub -t "clinique/#" -u telegraf_agent -P clinique2026 -v
 ```
 
-*(L'ancien script `simulateur_clinique.py` lancé à la main avec `py simulateur_clinique.py --broker localhost` reste utilisable en secours si besoin — le code est identique, seul le mode de lancement change.)*
-
-### 6. Importer les dashboards Grafana
+### 7. Importer les dashboards Grafana
 
 1. Ouvrir Grafana : [http://localhost:3000](http://localhost:3000) (Id dans le compose.yaml )
 2. `+` → Import → Upload JSON pour chaque fichier dans `dashboard_grafana/`
@@ -231,13 +231,13 @@ docker exec clinique_mosquitto mosquitto_sub -h localhost -p 8883 --cafile /mosq
 | `db5_eco.json` | Écologie & consommation |
 | `db6_overview.json` | Vue globale clinique |
 
-### 7. Configurer Node-RED
+### 8. Configurer Node-RED
 
 1. Ouvrir Node-RED : [http://localhost:1880](http://localhost:1880)
 2. Importer le flow : `node-red/flow_alertes.json`
 3. Vérifier les nœuds MQTT avec les credentials `nodered_agent / clinique2026`
 
-### 8. Lancer le dashboard React
+### 9. Lancer le dashboard React
 
 ```bash
 cd react-dashboard
@@ -281,15 +281,13 @@ react-dashboard/
 │   ├── components/
 │   │   ├── Topbar.jsx            # Navigation + badge statut live/simu
 │   │   ├── ToastContainer.jsx    # Notifications
-│   │   ├── Patients.jsx / Securite.jsx / Energie.jsx / Alertes.jsx
-│   │   ├── Carte.jsx             # Carte géo (react-leaflet) + plan intérieur SVG
-│   │   ├── Historique.jsx        # Graphes vitaux (recharts) + alertes filtrables
+│   │   ├── Patients.jsx / Securite.jsx / Energie.jsx / Alertes.jsx / Carte.jsx
 │   │   └── ui.jsx                # KpiCard, Card, Gauge, ProgressBar, StatusDot...
 │   └── utils/
-│       ├── liveData.js           # autoLogin, connectSSE, fetch*, fetch*Historique, ackAlerte
+│       ├── liveData.js           # autoLogin, connectSSE, fetchAllVitaux, fetchEnergie, ackAlerte
 │       └── helpers.js            # generateTick (simulateur), constantes, couleurs
 ├── vite.config.js                # Proxy /api → localhost:8000 en dev
-└── package.json                  # + leaflet, react-leaflet, recharts
+└── package.json
 ```
 
 ### Configuration
@@ -342,7 +340,7 @@ Historique des blocages rencontrés pour le passage en mode live, utile en cas d
 
 ```
 mini-projet-iot/
-├── docker-compose.yaml          # 24 services orchestrés (dont simulateur)
+├── docker-compose.yaml          # 22 services orchestrés
 ├── simulateur_clinique.py    # Simulateur Python 7 chambres + auth
 ├── setup_auth.sh                # Configuration auth MQTT automatique
 ├── Wokwi-README.md              # Documentation firmware ESP32
@@ -542,7 +540,7 @@ cd wokwigw
 
 | Tâche | Équipe | Statut |
 |---|---|---|
-| Architecture Docker 24 services (simulateur inclus) | BD-GL | ✅ Terminé |
+| Architecture Docker 22 services | BD-GL | ✅ Terminé |
 | Firmware ESP32 ×3 (Wokwi) | BD-GL | ✅ Terminé |
 | Simulateur Python 7 chambres | BD-GL | ✅ Terminé |
 | Pipeline Telegraf → InfluxDB | BD-GL | ✅ Terminé |
@@ -550,8 +548,8 @@ cd wokwigw
 | Node-RED routing alertes | BD-GL | ✅ Terminé |
 | FastAPI ×3 endpoints (auth JWT, patients, alertes SSE, stats, chambres) | BD-GL | ✅ Terminé |
 | React Dashboard (live + fallback simulateur) | BD-GL | ✅ Terminé |
-| Analyse STRIDE | RIST | ✅ Terminé |
-| Auth MQTT (TLS/X.509) | RIST |✅ Terminé |
+| Analyse STRIDE | RIST | 🔄 En cours |
+| Auth MQTT (TLS/X.509) | RIST | 🔄 En cours |
 | MQTT ACLs | BD-GL + RIST | ✅ Configuré |
 | Tests Wireshark / MITM | RIST | ⏳ À faire |
 
@@ -567,4 +565,3 @@ cd wokwigw
 ---
 
 *Projet réalisé dans le cadre du hackathon IoT — Master 1 BD-GL & RIST · UFHB · Juin 2026*
->>>>>>> 28bd379 (Clinique Connectée — projet complet (IoT + API + dashboard React))
