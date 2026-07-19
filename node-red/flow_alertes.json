@@ -1,0 +1,252 @@
+[
+  {
+    "id": "tab_clinique",
+    "type": "tab",
+    "label": "Clinique Connectée — Alertes",
+    "disabled": false
+  },
+
+  {
+    "id": "mqtt_vitaux",
+    "type": "mqtt in",
+    "z": "tab_clinique",
+    "name": "MQTT — Vitaux patients",
+    "topic": "clinique/+/sante",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "mqtt_broker",
+    "x": 120,
+    "y": 80,
+    "wires": [["parse_vitaux"]]
+  },
+
+  {
+    "id": "mqtt_securite",
+    "type": "mqtt in",
+    "z": "tab_clinique",
+    "name": "MQTT — Sécurité",
+    "topic": "clinique/securite/#",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "mqtt_broker",
+    "x": 120,
+    "y": 200,
+    "wires": [["parse_securite"]]
+  },
+
+  {
+    "id": "mqtt_energie",
+    "type": "mqtt in",
+    "z": "tab_clinique",
+    "name": "MQTT — Énergie",
+    "topic": "clinique/energie/#",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "mqtt_broker",
+    "x": 120,
+    "y": 320,
+    "wires": [["parse_energie"]]
+  },
+
+  {
+    "id": "mqtt_appel",
+    "type": "mqtt in",
+    "z": "tab_clinique",
+    "name": "MQTT — Boutons appel",
+    "topic": "clinique/+/appel",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "mqtt_broker",
+    "x": 120,
+    "y": 440,
+    "wires": [["parse_appel"]]
+  },
+
+  {
+    "id": "parse_vitaux",
+    "type": "function",
+    "z": "tab_clinique",
+    "name": "Analyse vitaux → niveau alerte",
+    "func": "var payload = msg.payload;\nvar topic = msg.topic;\nvar parts = topic.split('/');\nvar chambre_id = parts[1] || 'INCONNU';\n\n// Extraction des valeurs\nvar fc = payload.frequence_cardiaque;\nvar temp = payload.temperature;\nvar syst = payload.pression_systolique;\nvar diast = payload.pression_diastolique;\nvar co2 = payload.co2_ppm;\n\nvar alertes = [];\n\n// ── Fréquence cardiaque ──\nif (fc !== undefined) {\n    if (fc < 40 || fc > 150) {\n        alertes.push({ niveau: 'ROUGE', field: 'frequence_cardiaque', valeur: fc, unite: 'bpm',\n            message: 'FC critique : ' + fc + ' bpm (normale 60-100)' });\n    } else if (fc < 50 || fc > 120) {\n        alertes.push({ niveau: 'ORANGE', field: 'frequence_cardiaque', valeur: fc, unite: 'bpm',\n            message: 'FC anormale : ' + fc + ' bpm' });\n    }\n}\n\n// ── Température ──\nif (temp !== undefined) {\n    if (temp > 40 || temp < 34) {\n        alertes.push({ niveau: 'ROUGE', field: 'temperature', valeur: temp, unite: '°C',\n            message: 'Température critique : ' + temp + '°C' });\n    } else if (temp > 38.5 || temp < 36) {\n        alertes.push({ niveau: 'ORANGE', field: 'temperature', valeur: temp, unite: '°C',\n            message: 'Température anormale : ' + temp + '°C' });\n    }\n}\n\n// ── Pression artérielle systolique ──\nif (syst !== undefined) {\n    if (syst > 180 || syst < 70) {\n        alertes.push({ niveau: 'ROUGE', field: 'pression_systolique', valeur: syst, unite: 'mmHg',\n            message: 'Pression systolique critique : ' + syst + ' mmHg' });\n    } else if (syst > 140 || syst < 90) {\n        alertes.push({ niveau: 'ORANGE', field: 'pression_systolique', valeur: syst, unite: 'mmHg',\n            message: 'Pression systolique anormale : ' + syst + ' mmHg' });\n    }\n}\n\n// ── CO2 ──\nif (co2 !== undefined) {\n    if (co2 > 2000) {\n        alertes.push({ niveau: 'ROUGE', field: 'co2_ppm', valeur: co2, unite: 'ppm',\n            message: 'CO₂ dangereux : ' + co2 + ' ppm (max 1000)' });\n    } else if (co2 > 1000) {\n        alertes.push({ niveau: 'ORANGE', field: 'co2_ppm', valeur: co2, unite: 'ppm',\n            message: 'CO₂ élevé : ' + co2 + ' ppm' });\n    }\n}\n\nvar messages = [];\nalertes.forEach(function(a) {\n    messages.push({\n        payload: {\n            chambre_id: chambre_id,\n            type_alerte: 'vitaux',\n            niveau: a.niveau,\n            message: a.message,\n            valeur_capteur: a.valeur,\n            unite: a.unite,\n            source: 'node-red/vitaux'\n        }\n    });\n});\n\nreturn [messages];\n",
+    "outputs": 1,
+    "x": 400,
+    "y": 80,
+    "wires": [["filtrer_doublon", "debug_vitaux"]]
+  },
+
+  {
+    "id": "parse_securite",
+    "type": "function",
+    "z": "tab_clinique",
+    "name": "Analyse sécurité → niveau",
+    "func": "var payload = msg.payload;\nvar topic = msg.topic;\nvar parts = topic.split('/');\nvar zone = parts[2] || 'zone_inconnue';\n\nvar alertes = [];\n\nif (payload.intrusion === true || payload.mouvement_non_autorise === true) {\n    alertes.push({\n        chambre_id: zone,\n        type_alerte: 'intrusion',\n        niveau: 'ROUGE',\n        message: 'Intrusion détectée dans la zone : ' + zone,\n        valeur_capteur: null,\n        unite: null,\n        source: 'node-red/securite'\n    });\n}\n\nif (payload.porte_forcee === true) {\n    alertes.push({\n        chambre_id: zone,\n        type_alerte: 'intrusion',\n        niveau: 'ROUGE',\n        message: 'Porte forcée — zone : ' + zone,\n        valeur_capteur: null,\n        unite: null,\n        source: 'node-red/securite'\n    });\n}\n\nif (payload.acces_non_autorise === true) {\n    alertes.push({\n        chambre_id: zone,\n        type_alerte: 'intrusion',\n        niveau: 'ORANGE',\n        message: 'Tentative d\\'accès non autorisé — zone : ' + zone,\n        valeur_capteur: null,\n        unite: null,\n        source: 'node-red/securite'\n    });\n}\n\nvar messages = alertes.map(function(a) { return { payload: a }; });\nreturn [messages];\n",
+    "outputs": 1,
+    "x": 400,
+    "y": 200,
+    "wires": [["filtrer_doublon"]]
+  },
+
+  {
+    "id": "parse_energie",
+    "type": "function",
+    "z": "tab_clinique",
+    "name": "Analyse énergie → niveau",
+    "func": "var payload = msg.payload;\nvar zone = payload.zone || 'batiment';\nvar tension = payload.tension_v;\nvar mode = payload.mode_alimentation;\nvar conso = payload.consommation_kw;\n\nvar alertes = [];\n\nif (mode === 'groupe_electrogene' || mode === 'onduleur') {\n    alertes.push({\n        chambre_id: zone,\n        type_alerte: 'energie',\n        niveau: 'ORANGE',\n        message: 'Alimentation de secours active : ' + mode,\n        valeur_capteur: null,\n        unite: null,\n        source: 'node-red/energie'\n    });\n}\n\nif (mode === 'panne' || tension < 180) {\n    alertes.push({\n        chambre_id: zone,\n        type_alerte: 'energie',\n        niveau: 'ROUGE',\n        message: 'PANNE ÉLECTRIQUE — tension : ' + tension + 'V',\n        valeur_capteur: tension,\n        unite: 'V',\n        source: 'node-red/energie'\n    });\n}\n\nif (conso > 50) {\n    alertes.push({\n        chambre_id: zone,\n        type_alerte: 'energie',\n        niveau: 'ORANGE',\n        message: 'Consommation anormalement élevée : ' + conso + ' kW',\n        valeur_capteur: conso,\n        unite: 'kW',\n        source: 'node-red/energie'\n    });\n}\n\nvar messages = alertes.map(function(a) { return { payload: a }; });\nreturn [messages];\n",
+    "outputs": 1,
+    "x": 400,
+    "y": 320,
+    "wires": [["filtrer_doublon"]]
+  },
+
+  {
+    "id": "parse_appel",
+    "type": "function",
+    "z": "tab_clinique",
+    "name": "Bouton appel → ROUGE",
+    "func": "var payload = msg.payload;\nvar topic = msg.topic;\nvar chambre_id = topic.split('/')[1] || 'INCONNU';\n\nif (payload.appel === true || payload.bouton_presse === true) {\n    return [{\n        payload: {\n            chambre_id: chambre_id,\n            type_alerte: 'appel',\n            niveau: 'ROUGE',\n            message: 'APPEL PATIENT — chambre ' + chambre_id + ' : assistance requise',\n            valeur_capteur: null,\n            unite: null,\n            source: 'node-red/appel'\n        }\n    }];\n}\nreturn null;\n",
+    "outputs": 1,
+    "x": 400,
+    "y": 440,
+    "wires": [["filtrer_doublon"]]
+  },
+
+  {
+    "id": "filtrer_doublon",
+    "type": "function",
+    "z": "tab_clinique",
+    "name": "Anti-doublon (30s)",
+    "func": "// Évite de renvoyer la même alerte plusieurs fois en 30 secondes\nvar key = msg.payload.chambre_id + ':' + msg.payload.type_alerte + ':' + msg.payload.niveau;\nvar now = Date.now();\nvar cache = context.get('alerte_cache') || {};\n\nif (cache[key] && (now - cache[key]) < 30000) {\n    return null; // doublon, on ignore\n}\n\ncache[key] = now;\ncontext.set('alerte_cache', cache);\nreturn msg;\n",
+    "outputs": 1,
+    "x": 680,
+    "y": 260,
+    "wires": [["router_niveau"]]
+  },
+
+  {
+    "id": "router_niveau",
+    "type": "switch",
+    "z": "tab_clinique",
+    "name": "Router par niveau",
+    "property": "payload.niveau",
+    "propertyType": "msg",
+    "rules": [
+      { "t": "eq", "v": "ROUGE",  "vt": "str" },
+      { "t": "eq", "v": "ORANGE", "vt": "str" },
+      { "t": "eq", "v": "VERT",   "vt": "str" }
+    ],
+    "checkall": "false",
+    "repair": false,
+    "outputs": 3,
+    "x": 880,
+    "y": 260,
+    "wires": [
+      ["http_api_alerte", "mqtt_out_rouge"],
+      ["http_api_alerte", "mqtt_out_orange"],
+      ["http_api_alerte"]
+    ]
+  },
+
+  {
+    "id": "http_api_alerte",
+    "type": "http request",
+    "z": "tab_clinique",
+    "name": "POST → FastAPI /api/alertes",
+    "method": "POST",
+    "ret": "obj",
+    "paytoqs": "ignore",
+    "url": "http://clinique_nginx:80/api/alertes",
+    "tls": "",
+    "persist": false,
+    "proxy": "",
+    "authType": "bearer",
+    "x": 1140,
+    "y": 200,
+    "wires": [["debug_api"]]
+  },
+
+  {
+    "id": "set_bearer_token",
+    "type": "function",
+    "z": "tab_clinique",
+    "name": "Ajouter token JWT",
+    "func": "msg.headers = msg.headers || {};\nmsg.headers['Authorization'] = 'Bearer ' + env.get('NODERED_API_TOKEN');\nmsg.headers['Content-Type'] = 'application/json';\nreturn msg;\n",
+    "outputs": 1,
+    "x": 960,
+    "y": 340,
+    "wires": [["http_api_alerte"]]
+  },
+
+  {
+    "id": "mqtt_out_rouge",
+    "type": "mqtt out",
+    "z": "tab_clinique",
+    "name": "MQTT — Alerte ROUGE",
+    "topic": "clinique/alertes/critique",
+    "qos": "1",
+    "retain": "false",
+    "broker": "mqtt_broker",
+    "x": 1140,
+    "y": 300,
+    "wires": []
+  },
+
+  {
+    "id": "mqtt_out_orange",
+    "type": "mqtt out",
+    "z": "tab_clinique",
+    "name": "MQTT — Alerte ORANGE",
+    "topic": "clinique/alertes/avertissement",
+    "qos": "1",
+    "retain": "false",
+    "broker": "mqtt_broker",
+    "x": 1140,
+    "y": 360,
+    "wires": []
+  },
+
+  {
+    "id": "debug_vitaux",
+    "type": "debug",
+    "z": "tab_clinique",
+    "name": "Debug vitaux",
+    "active": true,
+    "tosidebar": true,
+    "x": 680,
+    "y": 80,
+    "wires": []
+  },
+
+  {
+    "id": "debug_api",
+    "type": "debug",
+    "z": "tab_clinique",
+    "name": "Réponse API",
+    "active": true,
+    "tosidebar": true,
+    "x": 1340,
+    "y": 200,
+    "wires": []
+  },
+
+  {
+    "id": "mqtt_broker",
+    "type": "mqtt-broker",
+    "name": "Mosquitto Clinique",
+    "broker": "clinique_mosquitto",
+    "port": "1883",
+    "clientid": "nodered_clinique",
+    "usetls": false,
+    "compatmode": false,
+    "keepalive": "60",
+    "cleansession": true,
+    "birthTopic": "clinique/system/nodered/status",
+    "birthQos": "1",
+    "birthPayload": "online",
+    "closeTopic": "clinique/system/nodered/status",
+    "closePayload": "offline",
+    "credentials": {
+      "user": "nodered_agent",
+      "password": "clinique2026"
+    }
+  }
+]
